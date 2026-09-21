@@ -14,9 +14,9 @@
 #include <string_view>
 
 #ifdef MTA_DEBUG
-    #define SERVER_EXE_PATH "MTA Server64_d.exe"
+    #define SERVER_EXE_PATH "TMODServer_d.exe"
 #else
-    #define SERVER_EXE_PATH "MTA Server64.exe"
+    #define SERVER_EXE_PATH "TMODServer.exe"
 #endif
 
 constexpr UINT PROCESS_FORCEFULLY_TERMINATED = 0x90804050u;

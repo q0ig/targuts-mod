@@ -11,7 +11,6 @@
 #include "StdInc.h"
 #include "CZipMaker.h"
 #include <zip.h>
-#include <filesystem>
 
 #ifdef WIN32
     #include <zip/iowin32.h>
@@ -109,25 +108,22 @@ bool CZipMaker::InsertDirectoryTree(const SString& strInSrc, const SString& strI
     SString strSrc = PathConform(strInSrc);
     SString strDest = PathConform(strInDest);
 
-    std::error_code                     error;
-    std::filesystem::directory_iterator iter(std::filesystem::u8path(strSrc.begin(), strSrc.end()), error);
-    if (error)
-        return false;
-
-    for (; iter != std::filesystem::directory_iterator(); iter.increment(error))
+    std::vector<SString> fileList = FindFiles(PathJoin(strSrc, ""), true, true);
+    for (unsigned int i = 0; i < fileList.size(); i++)
     {
-        if (error)
-            return false;
+        SString strSrcNext = PathConform(PathJoin(strSrc, fileList[i]));
+        SString strDestNext = PathConform(PathJoin(strDest, fileList[i]));
 
-        auto    utf8Name = iter->path().filename().u8string();
-        SString strName = std::string(utf8Name.begin(), utf8Name.end());
-        SString strSrcNext = PathJoin(strSrc, strName);
-        SString strDestNext = PathJoin(strDest, strName);
-        bool    bDirectory = iter->is_directory(error);
-        if (error || !(bDirectory ? InsertDirectoryTree(strSrcNext, strDestNext) : InsertFile(strSrcNext, strDestNext)))
-            return false;
+        if (FileExists(strSrcNext))
+        {
+            InsertFile(strSrcNext, strDestNext);
+        }
+        else if (DirectoryExists(strSrcNext))
+        {
+            InsertDirectoryTree(strSrcNext, strDestNext);
+        }
     }
-    return !error;
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -165,6 +161,7 @@ bool CZipMaker::AddFile(const SString& strDest, const std::vector<char>& buffer)
             iResult = zipWriteInFileInZip(m_uzFile, &buffer[0], buffer.size());
     }
 
-    int iCloseResult = zipCloseFileInZip(m_uzFile);
-    return iResult == ZIP_OK && iCloseResult == ZIP_OK;
+    zipCloseFileInZip(m_uzFile);
+
+    return iResult == ZIP_OK;
 }

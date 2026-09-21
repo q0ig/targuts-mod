@@ -75,12 +75,6 @@ bool CClientPedManager::Exists(CClientPed* pPed)
     return false;
 }
 
-void CClientPedManager::ReapplyScriptRotations()
-{
-    for (uint i = 0; i < m_StreamedIn.size(); i++)
-        m_StreamedIn[i]->ReapplyScriptRotationIfNeeded();
-}
-
 void CClientPedManager::RemoveFromList(CClientPed* pPed)
 {
     if (m_bRemoveFromList)

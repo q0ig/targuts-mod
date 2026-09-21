@@ -254,11 +254,8 @@ void CPedSync::Packet_PedSync(CPedSyncPacket& Packet)
         if (Data.ucFlags & 0x04)
             pPed->SetVelocity(Data.velocity.data.vecVelocity);
 
-        // Clamp in place, the same data is relayed to the other players below
         if (Data.ucFlags & 0x08)
         {
-            Data.fHealth = std::clamp(Data.fHealth, 0.0f, pPed->GetMaxHealth());
-
             // Less health than last time?
             float fPreviousHealth = pPed->GetHealth();
             pPed->SetHealth(Data.fHealth);
@@ -279,10 +276,7 @@ void CPedSync::Packet_PedSync(CPedSyncPacket& Packet)
         }
 
         if (Data.ucFlags & 0x10)
-        {
-            Data.fArmor = std::clamp(Data.fArmor, 0.0f, 100.0f);
             pPed->SetArmor(Data.fArmor);
-        }
 
         if (Data.flags2 & 0x01)
             pPed->SetCameraRotation(Data.cameraRotation);

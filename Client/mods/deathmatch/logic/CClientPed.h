@@ -202,9 +202,6 @@ public:
     void SetRotationRadiansNew(const CVector& vecRotation);
     void SetCurrentRotationNew(float fRotation);
 
-    void SetScriptRotationOverride(const CVector& vecRotationRadians);
-    void ReapplyScriptRotationIfNeeded();
-
     void Teleport(const CVector& vecPosition);
 
     // This function spawns/respawns this ped in any location. This will force a recreation
@@ -757,8 +754,6 @@ public:
     uint                                     m_uiFrameLastRebuildPlayer;
     bool                                     m_bIsSyncing;
     bool                                     m_shouldRecreate{false};
-    bool                                     m_bHasScriptRotationOverride{};
-    CVector                                  m_vecScriptRotation{};
 
     bool             m_bBulletImpactData;
     CClientEntityPtr m_pBulletImpactEntity;

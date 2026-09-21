@@ -25,27 +25,8 @@ CResourceStartPacket::CResourceStartPacket(const std::string& resourceName, CRes
 
 bool CResourceStartPacket::Write(NetBitStreamInterface& BitStream) const
 {
-    constexpr std::size_t maxLength = std::numeric_limits<unsigned char>::max();
-
-    if (m_strResourceName.empty() || m_strResourceName.size() > maxLength)
+    if (m_strResourceName.empty())
         return false;
-
-    const auto isEnabledClientFile = [this](CResourceFile* resourceFile)
-    {
-        return (resourceFile->GetType() == CResourceScriptItem::RESOURCE_FILE_TYPE_CLIENT_CONFIG && m_pResource->IsClientConfigsOn()) ||
-               (resourceFile->GetType() == CResourceScriptItem::RESOURCE_FILE_TYPE_CLIENT_SCRIPT && m_pResource->IsClientScriptsOn() &&
-                !static_cast<CResourceClientScriptItem*>(resourceFile)->IsNoClientCache()) ||
-               (resourceFile->GetType() == CResourceScriptItem::RESOURCE_FILE_TYPE_CLIENT_FILE && m_pResource->IsClientFilesOn());
-    };
-
-    // Lengths use one byte on the wire, so reject unsupported names before writing a partial packet.
-    for (CResourceFile* resourceFile : m_pResource->GetFiles())
-        if (isEnabledClientFile(resourceFile) && strlen(resourceFile->GetWindowsName()) > maxLength)
-            return false;
-
-    for (auto iter = m_pResource->IterBeginExportedFunctions(); iter != m_pResource->IterEndExportedFunctions(); ++iter)
-        if (iter->GetType() == CExportedFunction::EXPORTED_FUNCTION_TYPE_CLIENT && iter->GetFunctionName().size() > maxLength)
-            return false;
 
     // Write the resource name
     unsigned char sizeResourceName = static_cast<unsigned char>(m_strResourceName.size());
@@ -91,14 +72,17 @@ bool CResourceStartPacket::Write(NetBitStreamInterface& BitStream) const
     // Send the resource files info
     for (CResourceFile* resourceFile : m_pResource->GetFiles())
     {
-        if (isEnabledClientFile(resourceFile))
+        if ((resourceFile->GetType() == CResourceScriptItem::RESOURCE_FILE_TYPE_CLIENT_CONFIG && m_pResource->IsClientConfigsOn()) ||
+            (resourceFile->GetType() == CResourceScriptItem::RESOURCE_FILE_TYPE_CLIENT_SCRIPT && m_pResource->IsClientScriptsOn() &&
+             static_cast<CResourceClientScriptItem*>(resourceFile)->IsNoClientCache() == false) ||
+            (resourceFile->GetType() == CResourceScriptItem::RESOURCE_FILE_TYPE_CLIENT_FILE && m_pResource->IsClientFilesOn()))
         {
             // Write the Type of chunk to read (F - File, E - Exported Function)
             BitStream.Write(static_cast<unsigned char>('F'));
 
             // Write the map name
             const char* szFileName = resourceFile->GetWindowsName();
-            const auto  sizeFileName = static_cast<unsigned char>(strlen(szFileName));
+            size_t      sizeFileName = strlen(szFileName);
 
             // Make sure we don't have any backslashes in the name
             char* szCleanedFilename = new char[sizeFileName + 1];
@@ -144,9 +128,9 @@ bool CResourceStartPacket::Write(NetBitStreamInterface& BitStream) const
 
             // Write the exported function
             std::string strFunctionName = iterExportedFunction->GetFunctionName();
-            const auto  sizeFunctionName = static_cast<unsigned char>(strFunctionName.length());
+            size_t      sizeFunctionName = strFunctionName.length();
 
-            BitStream.Write(sizeFunctionName);
+            BitStream.Write(static_cast<unsigned char>(sizeFunctionName));
             if (sizeFunctionName > 0)
             {
                 BitStream.Write(strFunctionName.c_str(), sizeFunctionName);

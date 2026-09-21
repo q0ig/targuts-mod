@@ -10,6 +10,10 @@
  *****************************************************************************/
 
 #include "StdInc.h"
+#include "luadefs/CLuaTModPhysicsDefs.h"
+#include "luadefs/CLuaTModCameraDefs.h"
+#include "luadefs/CLuaTModMovementDefs.h"
+#include "luadefs/CLuaTModAssetDefs.h"
 #include "../luadefs/CLuaFireDefs.h"
 #include "../luadefs/CLuaClientDefs.h"
 #include "../luadefs/CLuaVectorGraphicDefs.h"
@@ -249,6 +253,10 @@ void CLuaManager::LoadCFunctions()
 
     // Luadef definitions
     CLuaAudioDefs::LoadFunctions();
+	CLuaTModPhysicsDefs::LoadFunctions();
+	CLuaTModCameraDefs::LoadFunctions();
+	CLuaTModMovementDefs::LoadFunctions();
+	CLuaTModAssetDefs::LoadFunctions();
     CLuaBlipDefs::LoadFunctions();
     CLuaBrowserDefs::LoadFunctions();
     CLuaCameraDefs::LoadFunctions();
@@ -286,3 +294,5 @@ void CLuaManager::LoadCFunctions()
     CLuaBuildingDefs::LoadFunctions();
     CLuaPostfxDefs::LoadFunctions();
 }
+
+

@@ -10,6 +10,11 @@
  *****************************************************************************/
 
 #include "StdInc.h"
+#include "physics/CTModPhysicsManager.h"
+#include "camera/CTModCameraManager.h"
+#include "movement/CTModMovementManager.h"
+#include "assets/CTModAssetManager.h"
+#include "rendering/CTModPostFXManager.h"
 #include <net/SyncStructures.h>
 #include <game/C3DMarkers.h>
 #include <game/CAnimBlendAssocGroup.h>
@@ -423,6 +428,8 @@ CClientGame::CClientGame(bool bLocalPlay) : m_ServerInfo(new CServerInfo())
 CClientGame::~CClientGame()
 {
     m_bBeingDeleted = true;
+    CTModPhysicsManager::GetSingleton().Shutdown();
+    CTModAssetManager::GetSingleton().Shutdown();
     // Remove active projectile references to local player
     if (auto pLocalPlayer = g_pClientGame->GetLocalPlayer())
         g_pGame->GetProjectileInfo()->RemoveEntityReferences(pLocalPlayer->GetGameEntity());
@@ -655,6 +662,10 @@ void CClientGame::StartPlayback()
 bool CClientGame::StartGame(const char* szNick, const char* szPassword, eServerType Type)
 {
     m_ServerType = Type;
+    CTModPhysicsManager::GetSingleton().Init();
+    CTModCameraManager::GetSingleton().Init();
+    CTModMovementManager::GetSingleton().Init();
+    CTModAssetManager::GetSingleton().Init();
     // int dbg = _CrtSetDbgFlag ( _CRTDBG_REPORT_FLAG );
     // dbg |= _CRTDBG_ALLOC_MEM_DF;
     // dbg |= _CRTDBG_CHECK_ALWAYS_DF;
@@ -721,8 +732,8 @@ bool CClientGame::StartGame(const char* szNick, const char* szPassword, eServerT
             pBitStream->Write(reinterpret_cast<const char*>(Password.data), sizeof(MD5));
 
             // Append community information (removed, but we keep this to retain protocol compat)
-            const std::array<char, MAX_SERIAL_LENGTH> communityData{};
-            pBitStream->Write(communityData.data(), communityData.size());
+            std::string strUser;
+            pBitStream->Write(strUser.c_str(), MAX_SERIAL_LENGTH);
 
             // Send the packet as joindata
             g_pNet->SendPacket(PACKET_ID_PLAYER_JOINDATA, pBitStream, PACKET_PRIORITY_HIGH, PACKET_RELIABILITY_RELIABLE_ORDERED);
@@ -764,6 +775,10 @@ bool CClientGame::StartLocalGame(eServerType Type, const char* szPassword)
 
     m_bWaitingForLocalConnect = false;
     m_ServerType = Type;
+    CTModPhysicsManager::GetSingleton().Init();
+    CTModCameraManager::GetSingleton().Init();
+    CTModMovementManager::GetSingleton().Init();
+    CTModAssetManager::GetSingleton().Init();
     SString strTemp = (Type == SERVER_TYPE_EDITOR) ? "editor.conf" : "local.conf";
 
     SAFE_DELETE(m_pLocalServer);
@@ -1137,6 +1152,9 @@ void CClientGame::DoPulses()
     TIMING_CHECKPOINT("+CClientGame::DoPulses");
 
     m_BuiltCollisionMapThisFrame = false;
+    CTModCameraManager::GetSingleton().DoPulse();
+    CTModMovementManager::GetSingleton().DoPulse(0.016f);
+    CTModPhysicsManager::GetSingleton().DoPulse(0.016f);
 
     if (m_bIsPlayingBack && m_bFirstPlaybackFrame && m_pManager->IsGameLoaded())
     {
@@ -3668,10 +3686,21 @@ void CClientGame::StaticPreFxRenderHandler()
     // no longer reference CModelRenderer's queue elements.
     g_pClientGame->GetModelRenderer()->NotifyFrameEnd();
     g_pCore->OnPreFxRender();
+
+    // TMOD Custom 3D Mesh Renderer (GMod maps & custom props)
+    // Runs right after 3D world scene rendering while depth-buffer and camera matrices are active
+    CTModAssetManager::GetSingleton().Render();
+
+    // TMOD Custom Skeletal Mesh & Capsule Pipeline Renderer
+    CTModMovementManager::GetSingleton().Render();
 }
 
 void CClientGame::StaticPostColorFilterRenderHandler()
 {
+    if (g_pCore && g_pCore->GetGraphics() && g_pCore->GetGraphics()->GetDevice())
+    {
+        CTModPostFXManager::GetSingleton().Render(g_pCore->GetGraphics()->GetDevice());
+    }
     g_pCore->OnPostColorFilterRender();
 }
 
@@ -3918,6 +3947,9 @@ void CClientGame::Render3DStuffHandler()
 
 void CClientGame::PreRenderSkyHandler()
 {
+    // Bind camera matrix to character head bone right before 3D scene rendering
+    CTModCameraManager::GetSingleton().UpdateCameraPreRender();
+
     g_pCore->GetGraphics()->GetRenderItemManager()->PreDrawWorld();
 }
 
@@ -3943,9 +3975,6 @@ void CClientGame::PreWorldProcessHandler()
 
 void CClientGame::PostWorldProcessHandler()
 {
-    // CWorld::Process has just overwritten ped headings, restore script-set ones before onClientPreRender, sync and rendering read them
-    m_pManager->GetPedManager()->ReapplyScriptRotations();
-
     m_pManager->GetMarkerManager()->DoPulse();
     m_pManager->GetPointLightsManager()->DoPulse();
     m_pManager->GetObjectManager()->DoPulse();
@@ -3991,6 +4020,10 @@ void CClientGame::IdleHandler()
                 m_pManager->GetSoundManager()->SetMinimizeMuted(true);
         }
     }
+
+    // Update TMOD custom camera (FPV head-lock / TPV orbit) right after GTA's CGame::Process() finishes,
+    // before GTA's CGame::Render() and RwCameraBeginUpdate() execute.
+    CTModCameraManager::GetSingleton().UpdateCameraPreRender();
 
     // Ensure dummy progress graphic will be displayed when using alt pulse order
     g_pCore->SetDummyProgressUpdateAlways(true);

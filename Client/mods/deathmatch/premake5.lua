@@ -10,13 +10,17 @@ project "Client Deathmatch"
 
 	defines { "LUNASVG_BUILD", "LUA_USE_APICHECK", "SDK_WITH_BCRYPT" }
 	links {
-		"Lua_Client", "pcre2", "json-c", "ws2_32", "portaudio", "zlib", "cryptopp", "libspeex", "blowfish_bcrypt", "lunasvg",
+		"Lua_Client", "pcre2", "json-c", "ws2_32", "portaudio", "zlib", "cryptopp", "libspeex", "blowfish_bcrypt", "lunasvg", "BulletPhysics", "assimp",
 		"../../../vendor/bass/lib/bass",
 		"../../../vendor/bass/lib/bass_fx",
 		"../../../vendor/bass/lib/bassmix",
 		"../../../vendor/bass/lib/tags"
 	}
 
+	libdirs {
+		"../../../vendor/assimp/lib",
+		"../../../vendor/vtflib/lib"
+	}
 	vpaths {
 		["Headers/*"] = {"**.h", "../../../Shared/mods/deathmatch/**.h", "../../**.h"},
 		["Sources/*"] = {"**.cpp", "../../../Shared/mods/deathmatch/**.cpp", "../../../Shared/**.cpp", "../../../vendor/**.cpp"},
@@ -46,7 +50,10 @@ project "Client Deathmatch"
 			"../../../Shared/animation",
 			"../../../Shared",
 			"../../../vendor/sparsehash/src/",
-			"../../../vendor/lunasvg/include"
+			"../../../vendor/lunasvg/include",
+			"../../../vendor/bullet3/src",
+			"../../../vendor/assimp/include",
+			"../../../vendor/vtflib/include"
 	}
 
 	files {
@@ -69,3 +76,5 @@ project "Client Deathmatch"
 
 	filter "system:not windows"
 		flags { "ExcludeFromBuild" }
+
+

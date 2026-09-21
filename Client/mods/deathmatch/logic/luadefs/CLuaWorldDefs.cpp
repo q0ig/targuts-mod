@@ -8,6 +8,7 @@
  *****************************************************************************/
 
 #include "StdInc.h"
+#include "rendering/CTModPostFXManager.h"
 #include <game/CSettings.h>
 #include <game/CWeather.h>
 #include <game/CColPoint.h>
@@ -119,6 +120,7 @@ void CLuaWorldDefs::LoadFunctions()
         {"createExplosion", CreateExplosion},
 
         // World reset funcs
+        {"tmodSetSourceColorCorrection", ArgumentParser<SetSourceColorCorrection>},
         {"resetColorFilter", ArgumentParser<ResetColorFilter>},
         {"resetCoronaReflectionsEnabled", ArgumentParser<ResetCoronaReflectionsEnabled>},
         {"resetSkyGradient", ResetSkyGradient},
@@ -2042,6 +2044,12 @@ int CLuaWorldDefs::GetFPSLimit(lua_State* luaVM)
 
     lua_pushnumber(luaVM, fps);
     return 1;
+}
+
+bool CLuaWorldDefs::SetSourceColorCorrection(bool bEnabled)
+{
+    CTModPostFXManager::GetSingleton().SetSourceColorCorrection(bEnabled);
+    return true;
 }
 
 bool CLuaWorldDefs::ResetColorFilter()

@@ -1207,12 +1207,12 @@ void CNetAPI::WritePlayerPuresync(CClientPlayer* pPlayerModel, NetBitStreamInter
     // Player health sync (scaled from 0.0f-200.0f to 0-255 to save three bytes).
     // Scale goes up to 200.0f because having max stats gives you the double of health.
     SPlayerHealthSync health;
-    health.data.fValue = std::clamp(pPlayerModel->GetHealth(), 0.0f, pPlayerModel->GetMaxHealth());
+    health.data.fValue = pPlayerModel->GetHealth();
     BitStream.Write(&health);
 
     // Player armor (scaled from 0.0f-100.0f to 0-255 to save three bytes)
     SPlayerArmorSync armor;
-    armor.data.fValue = std::clamp(pPlayerModel->GetArmor(), 0.0f, 100.0f);
+    armor.data.fValue = pPlayerModel->GetArmor();
     BitStream.Write(&armor);
 
     // Write the camera rotation (Determines base for left stick movement)
@@ -1739,12 +1739,12 @@ void CNetAPI::WriteVehiclePuresync(CClientPed* pPlayerModel, CClientVehicle* pVe
     // Player health sync (scaled from 0.0f-200.0f to 0-255 to save three bytes).
     // Scale goes up to 200.0f because having max stats gives you the double of health.
     SPlayerHealthSync health;
-    health.data.fValue = std::clamp(pPlayerModel->GetHealth(), 0.0f, pPlayerModel->GetMaxHealth());
+    health.data.fValue = pPlayerModel->GetHealth();
     BitStream.Write(&health);
 
     // Player armor (scaled from 0.0f-100.0f to 0-255 to save three bytes)
     SPlayerArmorSync armor;
-    armor.data.fValue = std::clamp(pPlayerModel->GetArmor(), 0.0f, 100.0f);
+    armor.data.fValue = pPlayerModel->GetArmor();
     BitStream.Write(&armor);
 
     // Get the player weapon

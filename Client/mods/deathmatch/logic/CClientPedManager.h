@@ -42,8 +42,6 @@ public:
     void RestreamAllPeds();
     void RestreamWeapon(unsigned short usModel);
 
-    void ReapplyScriptRotations();
-
 protected:
     CClientPedManager(class CClientManager* pManager);
     ~CClientPedManager();

@@ -27,8 +27,7 @@ bool CPlayerScreenShotPacket::Read(NetBitStreamInterface& BitStream)
     uint uiServerGrabTime;
 
     // Read status
-    if (!BitStream.Read(m_ucStatus))
-        return false;
+    BitStream.Read(m_ucStatus);
 
     if (m_ucStatus != EPlayerScreenShotResult::SUCCESS)
     {
@@ -48,8 +47,8 @@ bool CPlayerScreenShotPacket::Read(NetBitStreamInterface& BitStream)
     else if (m_ucStatus == EPlayerScreenShotResult::SUCCESS)
     {
         // Read info
-        if (!BitStream.Read(m_usScreenShotId) || !BitStream.Read(m_usPartNumber))
-            return false;
+        BitStream.Read(m_usScreenShotId);
+        BitStream.Read(m_usPartNumber);
 
         // Read data
         ushort usNumBytes = 0;
@@ -64,9 +63,12 @@ bool CPlayerScreenShotPacket::Read(NetBitStreamInterface& BitStream)
         if (m_usPartNumber == 0)
         {
             bHasGrabTime = true;
+            BitStream.Read(uiServerGrabTime);
+            BitStream.Read(m_uiTotalBytes);
+            BitStream.Read(m_usTotalParts);
+
             ushort usResourceNetId;
-            if (!BitStream.Read(uiServerGrabTime) || !BitStream.Read(m_uiTotalBytes) || !BitStream.Read(m_usTotalParts) || !BitStream.Read(usResourceNetId))
-                return false;
+            BitStream.Read(usResourceNetId);
             m_pResource = g_pGame->GetResourceManager()->GetResourceFromNetID(usResourceNetId);
 
             if (!BitStream.ReadString(m_strTag))

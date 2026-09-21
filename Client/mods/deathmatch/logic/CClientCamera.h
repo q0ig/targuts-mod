@@ -95,6 +95,7 @@ public:
     bool    IsInCameraTransition() const;
     CMatrix GetInterpolatedCameraMatrix() const;
     float   GetAccurateFOV() const;
+    void    InvalidateCachedTransforms() const;
 
 private:
     CClientCamera(CClientManager* pManager);
@@ -107,7 +108,6 @@ private:
     void        SetGtaMatrix(const CMatrix& matInNew, CCam* pCam = NULL) const;
 
     void           SetFocusToLocalPlayerImpl();
-    void           InvalidateCachedTransforms() const;
     void           SetCenterOfWorldCached(const CVector* pPosition, float fRotationRadians);
     void           UpdateCenterOfWorldFromFixedMatrix();
     const CMatrix& AcquirePulseMatrix() const;
@@ -116,8 +116,6 @@ private:
     void UnreferenceEntity(CClientEntity* pEntity);
     void InvalidateEntity(CClientEntity* pEntity);
     void RestoreEntity(CClientEntity* pEntity);
-
-    void PersistViewModes();
 
     CClientPlayerManager* m_pPlayerManager;
 
@@ -140,10 +138,6 @@ private:
     CVector         m_lastCenterOfWorldPos;
     float           m_lastCenterOfWorldRot;
     bool            m_hasCenterOfWorld;
-
-    bool         m_viewModesRestored{false};
-    std::uint8_t m_lastVehicleViewMode{0};
-    std::uint8_t m_lastPedViewMode{0};
 
     CCamera* m_pCamera;
 };

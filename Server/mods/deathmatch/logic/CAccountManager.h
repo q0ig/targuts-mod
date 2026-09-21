@@ -173,8 +173,7 @@ protected:
 public:
     void        RemoveAll();
     static void StaticDbCallback(CDbJobData* pJobData, void* pContext);
-    static void StaticAccountSaveDbCallback(CDbJobData* pJobData, void* pContext);
-    bool        DbCallback(CDbJobData* pJobData);
+    void        DbCallback(CDbJobData* pJobData);
     static bool IsValidAccountName(const SString& strName);
     static bool IsValidPassword(const SString& strPassword);
     static bool IsValidNewAccountName(const SString& strName);

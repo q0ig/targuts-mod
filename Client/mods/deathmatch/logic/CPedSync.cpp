@@ -286,8 +286,6 @@ void CPedSync::WritePedInformation(NetBitStreamInterface* pBitStream, CClientPed
     pPed->GetPosition(vecPosition);
     CVector vecVelocity;
     pPed->GetMoveSpeed(vecVelocity);
-    const float fHealth = std::clamp(pPed->GetHealth(), 0.0f, pPed->GetMaxHealth());
-    const float fArmor = std::clamp(pPed->GetArmor(), 0.0f, 100.0f);
 
     unsigned char ucFlags = 0;
     if (vecPosition != pPed->m_LastSyncedData->vPosition)
@@ -296,9 +294,9 @@ void CPedSync::WritePedInformation(NetBitStreamInterface* pBitStream, CClientPed
         ucFlags |= 0x02;
     if (vecVelocity != pPed->m_LastSyncedData->vVelocity)
         ucFlags |= 0x04;
-    if (fHealth != pPed->m_LastSyncedData->fHealth)
+    if (pPed->GetHealth() != pPed->m_LastSyncedData->fHealth)
         ucFlags |= 0x08;
-    if (fArmor != pPed->m_LastSyncedData->fArmour)
+    if (pPed->GetArmor() != pPed->m_LastSyncedData->fArmour)
         ucFlags |= 0x10;
     if (pPed->IsOnFire() != pPed->m_LastSyncedData->bOnFire)
         ucFlags |= 0x20;
@@ -360,14 +358,14 @@ void CPedSync::WritePedInformation(NetBitStreamInterface* pBitStream, CClientPed
     // And health
     if (ucFlags & 0x08)
     {
-        pBitStream->Write(fHealth);
-        pPed->m_LastSyncedData->fHealth = fHealth;
+        pBitStream->Write(pPed->GetHealth());
+        pPed->m_LastSyncedData->fHealth = pPed->GetHealth();
     }
 
     if (ucFlags & 0x10)
     {
-        pBitStream->Write(fArmor);
-        pPed->m_LastSyncedData->fArmour = fArmor;
+        pBitStream->Write(pPed->GetArmor());
+        pPed->m_LastSyncedData->fArmour = pPed->GetArmor();
     }
 
     if (flags2 & 0x01)

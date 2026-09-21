@@ -34,7 +34,7 @@ public:
     ZERO_ON_NEW
 
     CSimPlayerPuresyncPacket(ElementID PlayerID, ushort PlayerLatency, uchar PlayerSyncTimeContext, uchar PlayerGotWeaponType, float WeaponRange,
-                             float PlayerMaxHealth, CControllerState& sharedControllerState);
+                             CControllerState& sharedControllerState);
 
     ePacketID     GetPacketID() const { return PACKET_ID_PLAYER_PURESYNC; };
     unsigned long GetFlags() const { return PACKET_MEDIUM_PRIORITY | PACKET_SEQUENCED; };
@@ -55,7 +55,6 @@ public:
     const uchar       m_PlayerSyncTimeContext;
     const uchar       m_PlayerGotWeaponType;
     const float       m_WeaponRange;
-    const float       m_PlayerMaxHealth;
     CControllerState& m_sharedControllerState;
 
     // Set in Read ()

@@ -1118,20 +1118,19 @@ bool CStaticFunctionDefinitions::SetElementRotation(CClientEntity& Entity, const
         case CCLIENTPLAYER:
         {
             CClientPed& Ped = static_cast<CClientPed&>(Entity);
-            CVector     vecUseRotation = vecRotation;
-            if (argumentRotOrder != EULER_DEFAULT && argumentRotOrder != EULER_MINUS_ZYX)
-                vecUseRotation = ConvertEulerRotationOrder(vecRotation, argumentRotOrder, EULER_MINUS_ZYX);
-
-            if (bNewWay)
+            if (argumentRotOrder == EULER_DEFAULT || argumentRotOrder == EULER_MINUS_ZYX)
             {
-                Ped.SetRotationDegreesNew(vecUseRotation);
-
-                ConvertDegreesToRadiansNoWrap(vecUseRotation);
-                Ped.SetScriptRotationOverride(vecUseRotation);
+                if (bNewWay)
+                    Ped.SetRotationDegreesNew(vecRotation);
+                else
+                    Ped.SetRotationDegrees(vecRotation);
             }
             else
             {
-                Ped.SetRotationDegrees(vecUseRotation);
+                if (bNewWay)
+                    Ped.SetRotationDegreesNew(ConvertEulerRotationOrder(vecRotation, argumentRotOrder, EULER_MINUS_ZYX));
+                else
+                    Ped.SetRotationDegrees(ConvertEulerRotationOrder(vecRotation, argumentRotOrder, EULER_MINUS_ZYX));
             }
             break;
         }
@@ -2297,9 +2296,6 @@ bool CStaticFunctionDefinitions::SetPedRotation(CClientEntity& Entity, float fRo
 
         if (!IS_PLAYER(&Entity))
             Ped.SetCameraRotation(-fRadians);
-
-        if (bNewWay)
-            Ped.SetScriptRotationOverride(CVector(0.0f, 0.0f, fRadians));
         return true;
     }
 

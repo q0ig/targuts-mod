@@ -10,7 +10,6 @@
  *****************************************************************************/
 
 #include "StdInc.h"
-
 #include "CAccountManager.h"
 #include "CGame.h"
 #include "CDatabaseManager.h"
@@ -20,15 +19,6 @@
 #include "CAccessControlListManager.h"
 #include "Utils.h"
 #include "CMapManager.h"
-
-namespace
-{
-    struct SAccountSaveContext
-    {
-        CAccountManager* pManager;
-        int              iAccountId;
-    };
-}
 
 CAccountManager::CAccountManager(const SString& strDbPathFilename)
     : m_AccountProtect(6, 30000, 60000 * 1)  // Max of 6 attempts per 30 seconds, then 1 minute ignore
@@ -297,19 +287,11 @@ void CAccountManager::Save(CAccount* pAccount, bool bCheckForErrors)
 
     if (bCheckForErrors)
     {
-        auto pContext = std::make_unique<SAccountSaveContext>(SAccountSaveContext{this, static_cast<int>(iID)});
-        if (!m_pDatabaseManager->QueryWithCallback(m_hDbConnection, StaticAccountSaveDbCallback, pContext.get(), strQuery))
-        {
-            MarkAsChanged(pAccount);
-            return;
-        }
-
-        pContext.release();
+        m_pDatabaseManager->QueryWithCallback(m_hDbConnection, StaticDbCallback, this, strQuery);
     }
     else
     {
-        if (!m_pDatabaseManager->Exec(m_hDbConnection, strQuery))
-            return;
+        m_pDatabaseManager->Exec(m_hDbConnection, strQuery);
     }
 
     SaveAccountSerialUsage(pAccount);
@@ -324,7 +306,6 @@ void CAccountManager::Save(bool bForce)
     {
         // Attempted save now
         m_bChangedSinceSaved = false;
-        m_llLastTimeSaved = GetTickCount64_();
 
         for (auto pAccount : m_List)
         {
@@ -979,10 +960,13 @@ void CAccountManager::GetAccountsByIP(const SString& strIP, std::vector<CAccount
 
 CAccount* CAccountManager::GetAccountByID(int ID)
 {
-    // Failure callbacks must not query the same database that just failed.
-    for (CAccount* pAccount : m_List)
-        if (pAccount->GetID() == ID)
-            return pAccount;
+    CRegistryResult result;
+    m_pDatabaseManager->QueryWithResultf(m_hDbConnection, &result, "SELECT name FROM accounts WHERE id = ?", SQLITE_INTEGER, ID);
+
+    for (const auto& row : result->Data)
+    {
+        return Get(reinterpret_cast<const char*>(row[0].pVal));
+    }
 
     return nullptr;
 }
@@ -1077,31 +1061,16 @@ void CAccountManager::StaticDbCallback(CDbJobData* pJobData, void* pContext)
 #endif
 }
 
-void CAccountManager::StaticAccountSaveDbCallback(CDbJobData* pJobData, void* pContext)
-{
-    if (pJobData->stage != EJobStage::RESULT)
-        return;
-
-    std::unique_ptr<SAccountSaveContext> pSaveContext(static_cast<SAccountSaveContext*>(pContext));
-    if (pSaveContext->pManager->DbCallback(pJobData))
-        return;
-
-    // The account may have been removed while its asynchronous save was pending.
-    CAccount* pAccount = pSaveContext->pManager->GetAccountByID(pSaveContext->iAccountId);
-    if (pAccount)
-        pSaveContext->pManager->MarkAsChanged(pAccount);
-}
-
-bool CAccountManager::DbCallback(CDbJobData* pJobData)
+void CAccountManager::DbCallback(CDbJobData* pJobData)
 {
     if (!m_pDatabaseManager->QueryPoll(pJobData, 0))
     {
         CLogger::LogPrintf("ERROR: Something worrying happened in DbCallback '%s': %s.\n", *pJobData->GetCommandStringForLog(), *pJobData->result.strReason);
-        return false;
+        return;
     }
 
     if (pJobData->result.status != EJobResult::FAIL)
-        return true;
+        return;
 
     CLogger::LogPrintf("ERROR: While updating account with '%s': %s.\n", *pJobData->GetCommandStringForLog(), *pJobData->result.strReason);
     if (pJobData->result.strReason.ContainsI("missing database"))
@@ -1110,8 +1079,6 @@ bool CAccountManager::DbCallback(CDbJobData* pJobData)
         CLogger::LogPrintf("INFO: Reconnecting to accounts database\n");
         ReconnectToDatabase();
     }
-
-    return false;
 }
 
 //

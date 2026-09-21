@@ -308,7 +308,7 @@ bool CVehiclePuresyncPacket::Read(NetBitStreamInterface& BitStream)
             SPlayerHealthSync health;
             if (!BitStream.Read(&health))
                 return false;
-            float fHealth = std::clamp(health.data.fValue, 0.0f, pSourcePlayer->GetMaxHealth());
+            float fHealth = health.data.fValue;
 
             float fOldHealth = pSourcePlayer->GetHealth();
             float fHealthLoss = fOldHealth - fHealth;
@@ -335,7 +335,7 @@ bool CVehiclePuresyncPacket::Read(NetBitStreamInterface& BitStream)
             SPlayerArmorSync armor;
             if (!BitStream.Read(&armor))
                 return false;
-            float fArmor = std::clamp(armor.data.fValue, 0.0f, 100.0f);
+            float fArmor = armor.data.fValue;
 
             float fOldArmor = pSourcePlayer->GetArmor();
             float fArmorLoss = fOldArmor - fArmor;
