@@ -432,3 +432,5 @@ vendor/cef3/cef/Release/libcef.dll
 !vendor/assimp/lib/assimp.lib
 !vendor/assimp/bin/assimp-vc145-mt.dll
 !vendor/bullet3/bin/Release/BulletPhysics.lib
+
+push_to_github.bat

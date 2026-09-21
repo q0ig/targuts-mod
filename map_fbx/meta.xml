@@ -1,0 +1,5 @@
+<meta>
+    <info author="TMOD" type="script" name="FBX City Map" description="TMOD City Map with Bullet Physics Collision" />
+    <script src="client.lua" type="client" cache="false" />
+    <file src="city_map.obj" download="true" />
+</meta>

@@ -1,0 +1,7 @@
+<meta>
+    <info author="TMOD Team" type="script" name="TMOD Debug & Test GUI" version="1.0.0" />
+    <min_mta_version client="1.5.8" server="1.5.8" />
+    
+    <script src="server.lua" type="server" />
+    <script src="client.lua" type="client" />
+</meta>
