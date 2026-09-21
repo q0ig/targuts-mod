@@ -59,9 +59,9 @@
 #endif
 
 #ifdef MTA_CLIENT
-    #define MTA_DM_FULL_STRING "MTA:SA Client"
+    #define MTA_DM_FULL_STRING "TMOD Client"
 #else
-    #define MTA_DM_FULL_STRING "MTA:SA Server"
+    #define MTA_DM_FULL_STRING "TMOD Server"
 #endif
 
 // MTA_MAETRO is defined in premake5.lua
@@ -150,3 +150,5 @@ Client can't enter the game? Use Server net.dll from an official build.\n\
 -------------------------------------------------------------------------")
     #endif
 #endif
+
+

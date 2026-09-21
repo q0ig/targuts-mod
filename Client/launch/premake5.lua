@@ -1,7 +1,7 @@
 project "Client Launcher"
 	language "C++"
 	kind "WindowedApp"
-	targetname "Multi Theft Auto"
+	targetname "TMOD"
 	targetdir(buildpath("."))
 	debugdir(buildpath("."))
 	clangtidy "On"

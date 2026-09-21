@@ -1627,9 +1627,9 @@ void CVersionUpdater::_DoSidegradeLaunch()
 void CVersionUpdater::_DialogSidegradeDownloadQuestion()
 {
     GetQuestionBox().Reset();
-    GetQuestionBox().SetTitle(SString(_("MTA:SA %s required"), *m_strSidegradeVersion));
-    GetQuestionBox().SetMessage(SString(_("An updated version of MTA:SA %s is required to join the selected server.\n\n"
-                                          "Do you want to download and install MTA:SA %s ?"),
+    GetQuestionBox().SetTitle(SString(_("TMOD %s required"), *m_strSidegradeVersion));
+    GetQuestionBox().SetMessage(SString(_("An updated version of TMOD %s is required to join the selected server.\n\n"
+                                          "Do you want to download and install TMOD %s ?"),
                                         *m_strSidegradeVersion, *m_strSidegradeVersion));
     GetQuestionBox().SetButton(0, _("No"));
     GetQuestionBox().SetButton(1, _("Yes"));
@@ -1647,8 +1647,8 @@ void CVersionUpdater::_DialogSidegradeDownloadQuestion()
 void CVersionUpdater::_DialogSidegradeLaunchQuestion()
 {
     GetQuestionBox().Reset();
-    GetQuestionBox().SetTitle(SString(_("MTA:SA %s required"), *m_strSidegradeVersion));
-    GetQuestionBox().SetMessage(SString(_("Do you want to launch MTA:SA %s and connect to this server ?"), *m_strSidegradeVersion));
+    GetQuestionBox().SetTitle(SString(_("TMOD %s required"), *m_strSidegradeVersion));
+    GetQuestionBox().SetMessage(SString(_("Do you want to launch TMOD %s and connect to this server ?"), *m_strSidegradeVersion));
     GetQuestionBox().SetButton(0, _("No"));
     GetQuestionBox().SetButton(1, _("Yes"));
     GetQuestionBox().Show();
@@ -1665,7 +1665,7 @@ void CVersionUpdater::_DialogSidegradeLaunchQuestion()
 void CVersionUpdater::_DialogSidegradeQueryError()
 {
     GetQuestionBox().Reset();
-    GetQuestionBox().SetTitle(SString(_("MTA:SA %s required"), *m_strSidegradeVersion));
+    GetQuestionBox().SetTitle(SString(_("TMOD %s required"), *m_strSidegradeVersion));
     GetQuestionBox().SetMessage(_("It is not possible to connect at this time.\n\nPlease try later."));
     GetQuestionBox().SetButton(0, _("OK"));
     GetQuestionBox().Show();
@@ -2162,7 +2162,7 @@ void CVersionUpdater::_DialogDataFilesQuestion()
     // Display message
     GetQuestionBox().Reset();
     GetQuestionBox().SetTitle(_("ERROR"));
-    GetQuestionBox().SetMessage(_("Some MTA:SA data files are missing.\n\n\nPlease reinstall MTA:SA"));
+    GetQuestionBox().SetMessage(_("Some TMOD data files are missing.\n\n\nPlease reinstall TMOD"));
     GetQuestionBox().SetButton(0, _("Ok"));
     GetQuestionBox().Show();
     _PollAnyButton();

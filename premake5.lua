@@ -54,7 +54,7 @@ workspace "MTASA"
 	symbols "On"
 	flags "MultiProcessorCompile"
 
-	dxdir = os.getenv("DXSDK_DIR") or ""
+	dxdir = "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)"
 	includedirs {
 		"vendor",
 	}
@@ -229,4 +229,6 @@ workspace "MTASA"
 		include "vendor/unrar"
 		include "vendor/zip"
 		include "vendor/zlib"
+		include "vendor/bullet3"
 		include "vendor/glob"
+

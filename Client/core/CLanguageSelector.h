@@ -10,7 +10,7 @@
 
 struct CLangListItem
 {
-    CLangListItem() : fFocusEffectPos(0), fFocusEffectTarget(0), pContainerPane(nullptr), pIcon(nullptr), pLabel(nullptr) {}
+    CLangListItem() : fFocusEffectPos(0), fFocusEffectTarget(0), pContainerPane(nullptr), pIcon(nullptr), pLabel(nullptr), pLabelShadow(nullptr) {}
     float            fFocusEffectPos;
     float            fFocusEffectTarget;
     SString          strLocale;
@@ -19,6 +19,7 @@ struct CLangListItem
     CVector2D        vecIconInitialPos;
     CVector2D        vecIconInitialSize;
     CGUILabel*       pLabel;
+    CGUILabel*       pLabelShadow;
     CVector2D        vecLabelInitialPos;
     CVector2D        vecLabelInitialSize;
 };

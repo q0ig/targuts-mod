@@ -342,6 +342,11 @@ CMatrix* CEntitySA::GetMatrixInternal(CMatrix* matrix)
 
 void CEntitySA::SetMatrix(CMatrix* matrix)
 {
+    if (m_pInterface && !m_pInterface->matrix)
+    {
+        m_pInterface->AllocateMatrix();
+    }
+
     if (m_pInterface->matrix && matrix && IsValidMatrix(*matrix))
     {
         OnChangingPosition(matrix->vPos);

@@ -15,10 +15,7 @@ namespace SharedUtil
 
     CAsyncTaskScheduler::~CAsyncTaskScheduler()
     {
-        {
-            std::lock_guard<std::mutex> lock{m_TasksMutex};
-            m_Running = false;
-        }
+        m_Running = false;
 
         // Wait for all threads to end
         for (auto& thread : m_Workers)
@@ -41,19 +38,13 @@ namespace SharedUtil
 
     void CAsyncTaskScheduler::DoWork()
     {
-        while (true)
+        while (m_Running)
         {
             m_TasksMutex.lock();
 
             // Sleep a bit if there are no tasks
             if (m_Tasks.empty())
             {
-                if (!m_Running)
-                {
-                    m_TasksMutex.unlock();
-                    return;
-                }
-
                 m_TasksMutex.unlock();
                 std::this_thread::sleep_for(std::chrono::milliseconds(4));
                 continue;

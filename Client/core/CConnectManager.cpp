@@ -244,14 +244,9 @@ void CConnectManager::DoPulse()
                 OnServerExists();
 
                 m_bIsDetectingVersion = false;
-                // Is different version?
                 if (m_pServerItem->bScanned && m_pServerItem->strVersion != MTA_DM_ASE_VERSION)
                 {
-                    // Version mis-match. See about launching compatible .exe
-                    GetVersionUpdater()->InitiateSidegradeLaunch(m_pServerItem->strVersion, m_strHost.c_str(), m_usPort, m_strNick.c_str(),
-                                                                 m_strPassword.c_str());
-                    Abort();
-                    return;
+                    // [TMOD] Bypassed version mismatch check so we can connect to any server!
                 }
             }
         }

@@ -40,7 +40,8 @@ namespace
     };
 
     // Variables used for saving the server cache file on a separate thread
-    static std::atomic_bool ms_bIsSaving = false;
+    static bool                              ms_bIsSaving = false;
+    static std::map<CCachedKey, CCachedInfo> ms_ServerCachedMap;
 }  // namespace
 
 ///////////////////////////////////////////////////////////////
@@ -67,7 +68,7 @@ public:
 protected:
     bool                LoadServerCache();
     static DWORD WINAPI StaticThreadProc(LPVOID lpdwThreadParam);
-    static void         StaticSaveServerCache(const std::map<CCachedKey, CCachedInfo>& serverCachedMap);
+    static void         StaticSaveServerCache();
 
     bool                              m_bListChanged;
     std::map<CCachedKey, CCachedInfo> m_ServerCachedMap;
@@ -211,36 +212,37 @@ bool CServerCache::LoadServerCache()
 ///////////////////////////////////////////////////////////////
 void CServerCache::SaveServerCache(bool bWaitUntilFinished)
 {
-    // Finish the previous snapshot before checking for changes made during its save.
-    while (bWaitUntilFinished && ms_bIsSaving.load(std::memory_order_acquire))
-    {
-        Sleep(1);
-    }
-
     // Check if we need to save
-    if (m_bListChanged && !ms_bIsSaving.load(std::memory_order_acquire))
+    if (m_bListChanged && !ms_bIsSaving)
     {
-        auto* pServerCachedMap = new std::map<CCachedKey, CCachedInfo>(m_ServerCachedMap);
-        ms_bIsSaving.store(true, std::memory_order_release);
+        m_bListChanged = false;
+
+        // Copy vars for save thread
+        ms_ServerCachedMap = m_ServerCachedMap;
 
         // Start save thread
-        HANDLE hThread = CreateThread(NULL, 0, &CServerCache::StaticThreadProc, pServerCachedMap, 0, NULL);
+        HANDLE hThread = CreateThread(NULL, 0, &CServerCache::StaticThreadProc, NULL, CREATE_SUSPENDED, NULL);
         if (!hThread)
         {
-            ms_bIsSaving.store(false, std::memory_order_release);
-            delete pServerCachedMap;
             CCore::GetSingleton().GetConsole()->Printf("Could not create server cache thread.");
         }
         else
         {
-            m_bListChanged = false;
+            ms_bIsSaving = true;
             SetThreadPriority(hThread, THREAD_PRIORITY_LOWEST);
+
+            if (ResumeThread(hThread) == static_cast<DWORD>(-1))
+            {
+                CCore::GetSingleton().GetConsole()->Printf("Could not start server cache thread.");
+                ms_bIsSaving = false;
+            }
+
             CloseHandle(hThread);
         }
     }
 
     // If required, wait until save thread is done
-    while (bWaitUntilFinished && ms_bIsSaving.load(std::memory_order_acquire))
+    while (bWaitUntilFinished && ms_bIsSaving)
     {
         Sleep(1);
     }
@@ -255,9 +257,8 @@ void CServerCache::SaveServerCache(bool bWaitUntilFinished)
 ///////////////////////////////////////////////////////////////
 DWORD WINAPI CServerCache::StaticThreadProc(LPVOID lpdwThreadParam)
 {
-    std::unique_ptr<std::map<CCachedKey, CCachedInfo>> pServerCachedMap{static_cast<std::map<CCachedKey, CCachedInfo>*>(lpdwThreadParam)};
-    StaticSaveServerCache(*pServerCachedMap);
-    ms_bIsSaving.store(false, std::memory_order_release);
+    StaticSaveServerCache();
+    ms_bIsSaving = false;
     return 0;
 }
 
@@ -270,7 +271,7 @@ DWORD WINAPI CServerCache::StaticThreadProc(LPVOID lpdwThreadParam)
 // but the file itself is never deleted. Servers are synced, not purged.
 //
 ///////////////////////////////////////////////////////////////
-void CServerCache::StaticSaveServerCache(const std::map<CCachedKey, CCachedInfo>& serverCachedMap)
+void CServerCache::StaticSaveServerCache()
 {
     CXMLFile* m_pConfigFile = CCore::GetSingleton().GetXML()->CreateXML(CalcMTASAPath(MTA_SERVER_CACHE_PATH));
     if (!m_pConfigFile)
@@ -290,7 +291,7 @@ void CServerCache::StaticSaveServerCache(const std::map<CCachedKey, CCachedInfo>
 
     // Transfer each item from m_ServerCachedMap into dataSet
     CDataInfoSet dataSet;
-    for (const auto& [key, info] : serverCachedMap)
+    for (const auto& [key, info] : ms_ServerCachedMap)
     {
         // Only exclude servers that have failed multiple consecutive query attempts
         if (info.uiCacheNoReplyCount > 3)

@@ -24,7 +24,7 @@ project "Launcher"
 	}
 
 	filter "system:windows"
-		targetname "MTA Server"
+		targetname "TMODServer"
 		staticruntime "On"
 		-- Server requires Windows 10+ (cpp-httplib)
 		defines { "_WIN32_WINNT=0x0A00" }
@@ -48,7 +48,7 @@ project "Launcher"
 		targetname "mta-server64"
 
 	filter { "system:windows", "platforms:x64" }
-		targetname "MTA Server64"
+		targetname "TMODServer"
 
 	filter { "system:windows", "platforms:arm" }
 		targetname "MTA Server ARM"

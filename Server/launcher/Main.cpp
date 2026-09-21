@@ -45,6 +45,10 @@ FILE* SharedUtil::File::Fopen(const char* szFilename, const char* szMode)
 
 int main(int argc, char* argv[])
 {
+#ifdef _WIN32
+    SetConsoleTitleA("TMOD Dedicated Server64");
+#endif
+
     // Work out the launched directory and filename
     int   iLength = strlen(argv[0]);
     char* szLaunchDirectory = static_cast<char*>(alloca(iLength + 1));

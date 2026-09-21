@@ -43,13 +43,14 @@ void CGUI_Impl::DestroyElementRecursive(CGUIElement* pElement)
 #define CGUI_MTA_DEFAULT_REG_BOLD "Tahoma Bold (TrueType)"
 #define CGUI_MTA_CLEAR_REG        "Verdana (TrueType)"
 
-#define CGUI_MTA_SUBSTITUTE_FONT "cgui/unifont.ttf"   // GTA/MTA/<...>
-#define CGUI_MTA_SANS_FONT       "cgui/sans.ttf"      // GTA/MTA/<...>
-#define CGUI_SA_HEADER_FONT      "cgui/saheader.ttf"  // GTA/MTA/<...>
-#define CGUI_SA_GOTHIC_FONT      "cgui/sagothic.ttf"  // GTA/MTA/<...>
-#define CGUI_SA_HEADER_SIZE      26
-#define CGUI_SA_GOTHIC_SIZE      47
-#define CGUI_MTA_SANS_FONT_SIZE  9
+#define CGUI_MTA_SUBSTITUTE_FONT     "cgui/unifont.ttf"   // GTA/MTA/<...>
+#define CGUI_MTA_SANS_FONT           "cgui/sans.ttf"      // GTA/MTA/<...>
+#define CGUI_SA_HEADER_FONT          "cgui/saheader.ttf"  // GTA/MTA/<...>
+#define CGUI_SA_GOTHIC_FONT          "cgui/sagothic.ttf"  // GTA/MTA/<...>
+#define CGUI_SA_HEADER_SIZE          26
+#define CGUI_SA_GOTHIC_SIZE          47
+#define CGUI_MTA_SANS_FONT_SIZE      9
+#define CGUI_MTA_SANS_MENU_FONT_SIZE 13
 
 CGUI_Impl::CGUI_Impl(IDirect3DDevice9* pDevice)
     : m_HasSchemeLoaded(false),
@@ -72,6 +73,7 @@ CGUI_Impl::CGUI_Impl(IDirect3DDevice9* pDevice)
       m_pSAHeaderFont(nullptr),
       m_pSAGothicFont(nullptr),
       m_pSansFont(nullptr),
+      m_pSansMenuFont(nullptr),
       m_pUniFont(nullptr),
       m_nextRedrawHandle(1),
       m_ulPreviousUnique(0),
@@ -139,6 +141,7 @@ CGUI_Impl::CGUI_Impl(IDirect3DDevice9* pDevice)
         m_pSAHeaderFont = (CGUIFont_Impl*)CreateFnt("sa-header", CGUI_SA_HEADER_FONT, CGUI_SA_HEADER_SIZE, 0, true);
         m_pSAGothicFont = (CGUIFont_Impl*)CreateFnt("sa-gothic", CGUI_SA_GOTHIC_FONT, CGUI_SA_GOTHIC_SIZE, 0, true);
         m_pSansFont = (CGUIFont_Impl*)CreateFnt("sans", CGUI_MTA_SANS_FONT, CGUI_MTA_SANS_FONT_SIZE, 0, false);
+        m_pSansMenuFont = (CGUIFont_Impl*)CreateFnt("sans-menu", CGUI_MTA_SANS_FONT, CGUI_MTA_SANS_MENU_FONT_SIZE, 0, true);
     }
     catch (const CEGUI::Exception& e)
     {
@@ -164,6 +167,7 @@ CGUI_Impl::~CGUI_Impl()
     delete m_pSAHeaderFont;
     delete m_pSAGothicFont;
     delete m_pSansFont;
+    delete m_pSansMenuFont;
 
     // Clean up CEGUI system - this automatically deletes the renderer
     delete CEGUI::System::getSingletonPtr();

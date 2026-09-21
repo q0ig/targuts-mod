@@ -27,13 +27,14 @@ class CLanguageSelector;
 
 struct sMenuItem
 {
-    unsigned char    menuType;
-    int              drawPositionX;
-    int              drawPositionY;
-    int              nativeSizeX;
-    int              nativeSizeY;
-    CGUIStaticImage* image;
-    float            animProgress{};
+    unsigned char menuType;
+    int           drawPositionX;
+    int           drawPositionY;
+    int           nativeSizeX;
+    int           nativeSizeY;
+    CGUILabel*    label;
+    CGUILabel*    shadowLabel;
+    float         animProgress{};
 };
 
 class CMainMenu
@@ -82,7 +83,7 @@ public:
     bool WarnIfLocalServerUnsupported();
 
 private:
-    sMenuItem* CreateItem(unsigned char menuType, const char* szFilename, CVector2D vecRelPosition);
+    sMenuItem* CreateItem(unsigned char menuType, const char* szText, CVector2D vecRelPosition);
     bool       SetItemHoverProgress(sMenuItem* pItem, float fProgress, bool bHovering);
 
     bool OnMenuEnter(CGUIElement* pElement);

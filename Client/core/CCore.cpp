@@ -852,7 +852,7 @@ bool CCore::CheckDiskSpace(uint uiResourcesPathMinMB, uint uiDataPathMinMB)
     SString strDriveWithNoSpace = GetDriveNameWithNotEnoughSpace(uiResourcesPathMinMB, uiDataPathMinMB);
     if (!strDriveWithNoSpace.empty())
     {
-        SString strMessage(_("MTA:SA cannot continue because drive %s does not have enough space."), *strDriveWithNoSpace);
+        SString strMessage(_("TMOD cannot continue because drive %s does not have enough space."), *strDriveWithNoSpace);
         SString strTroubleLink(SString("low-disk-space&drive=%s", *strDriveWithNoSpace.Left(1)));
         g_pCore->ShowErrorMessageBox(_("Fatal error") + _E("CC43"), strMessage, strTroubleLink);
         return false;
@@ -1099,14 +1099,9 @@ void CCore::CreateNetwork()
     PFNCHECKCOMPATIBILITY pfnCheckCompatibility = static_cast<PFNCHECKCOMPATIBILITY>(m_NetModule.GetFunctionPointer("CheckCompatibility"));
     if (!pfnCheckCompatibility || !pfnCheckCompatibility(MTA_DM_CLIENT_NET_MODULE_VERSION, NULL))
     {
-        // net.dll doesn't like our version number
+        // [TMOD] Bypassed network module compatibility check!
         ulong ulNetModuleVersion = 0;
         pfnCheckCompatibility(1, &ulNetModuleVersion);
-        SString strMessage("Network module not compatible! (Expected 0x%x, got 0x%x)", MTA_DM_CLIENT_NET_MODULE_VERSION, ulNetModuleVersion);
-#if !defined(MTA_DM_PUBLIC_CONNECTIONS)
-        strMessage += "\n\n(Devs: Update source and run win-install-data.bat)";
-#endif
-        BrowseToSolution("netc-not-compatible", ASK_GO_ONLINE | TERMINATE_PROCESS, strMessage);
     }
 
     // Set mta version for report log here

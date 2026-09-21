@@ -11,18 +11,18 @@
 #include "StdInc.h"
 #include "CLanguageSelector.h"
 
-#define LANGUAGE_ICON_SIZE_X      20
-#define LANGUAGE_ICON_SIZE_Y      24
+#define LANGUAGE_ICON_SIZE_X      24
+#define LANGUAGE_ICON_SIZE_Y      28
 #define LANGUAGE_ICON_LABEL_GAP_X 10  // Gap between language icon and label
 
-#define LABEL_SIZE_X 165
-#define LABEL_SIZE_Y 16
+#define LABEL_SIZE_X 195
+#define LABEL_SIZE_Y 22
 
 #define LANGUAGE_ICON_LABEL_OFFSET_Y ((LANGUAGE_ICON_SIZE_Y - LABEL_SIZE_Y) / 2)
 
 // Language icon and label combo
-#define ITEM_SIZE_X 165
-#define ITEM_SIZE_Y 24
+#define ITEM_SIZE_X 195
+#define ITEM_SIZE_Y 28
 
 // Current language button
 #define BUTTON_MARGIN_X 20
@@ -32,7 +32,7 @@
 #define LIST_MARGIN_X       20
 #define LIST_MARGIN_Y       18
 #define LIST_ITEM_SPACING_X 10
-#define LIST_ITEM_SPACING_Y 1
+#define LIST_ITEM_SPACING_Y 2
 
 ///////////////////////////////////////////////////////////////
 //
@@ -120,7 +120,18 @@ void CLanguageSelector::CreateGUI(CGUIElement* pMainMenuCanvas)
         pIcon->SetZOrderingEnabled(false);
         pIcon->LoadFromFile(CalcMTASAPath("MTA\\cgui\\images\\the_language_icon.png"));
 
+        const char* szFont = g_pCore->GetGUI()->IsFontPresent("sans-menu") ? "sans-menu" : "sans";
+
+        CGUILabel* pLabelShadow = reinterpret_cast<CGUILabel*>(g_pCore->GetGUI()->CreateLabel(m_pButtonWindow));
+        pLabelShadow->SetFont(szFont);
+        pLabelShadow->SetPosition(vecLabelPos + CVector2D(1.5f, 1.5f));
+        pLabelShadow->SetSize(CVector2D(LABEL_SIZE_X, LABEL_SIZE_Y));
+        pLabelShadow->SetTextColor(0, 0, 0);
+        pLabelShadow->SetZOrderingEnabled(false);
+        pLabelShadow->SetText(g_pLocalization->GetLanguageNativeName());
+
         CGUILabel* pLabel = reinterpret_cast<CGUILabel*>(g_pCore->GetGUI()->CreateLabel(m_pButtonWindow));
+        pLabel->SetFont(szFont);
         pLabel->SetPosition(vecLabelPos);
         pLabel->SetSize(CVector2D(LABEL_SIZE_X, LABEL_SIZE_Y));
         pLabel->SetZOrderingEnabled(false);
@@ -132,6 +143,7 @@ void CLanguageSelector::CreateGUI(CGUIElement* pMainMenuCanvas)
         m_ButtonItem.vecIconInitialPos = pIcon->GetPosition();
         m_ButtonItem.vecIconInitialSize = pIcon->GetSize();
         m_ButtonItem.pLabel = pLabel;
+        m_ButtonItem.pLabelShadow = pLabelShadow;
         m_ButtonItem.vecLabelInitialPos = pLabel->GetPosition();
         m_ButtonItem.vecLabelInitialSize = pLabel->GetSize();
         m_ButtonItem.pContainerPane->SetMouseButtonDownHandler(GUI_CALLBACK(&CLanguageSelector::OnButtonClick, this));
@@ -209,7 +221,18 @@ CLangListItem CLanguageSelector::CreateGUILangItem(CGUIElement* pGUIParent, cons
     pContainerPane->SetAlwaysOnTop(true);
     pContainerPane->SetVisible(true);
 
+    const char* szFont = g_pCore->GetGUI()->IsFontPresent("sans-menu") ? "sans-menu" : "sans";
+
+    CGUILabel* pLabelShadow = reinterpret_cast<CGUILabel*>(g_pCore->GetGUI()->CreateLabel(pGUIParent));
+    pLabelShadow->SetFont(szFont);
+    pLabelShadow->SetPosition(vecLabelPos + CVector2D(1.5f, 1.5f));
+    pLabelShadow->SetSize(CVector2D(LABEL_SIZE_X, LABEL_SIZE_Y));
+    pLabelShadow->SetTextColor(0, 0, 0);
+    pLabelShadow->SetZOrderingEnabled(false);
+    pLabelShadow->SetText(g_pLocalization->GetLanguageNativeName(strLocale));
+
     CGUILabel* pLabel = reinterpret_cast<CGUILabel*>(g_pCore->GetGUI()->CreateLabel(pGUIParent));
+    pLabel->SetFont(szFont);
     pLabel->SetPosition(vecLabelPos);
     pLabel->SetSize(CVector2D(LABEL_SIZE_X, LABEL_SIZE_Y));
     pLabel->SetZOrderingEnabled(false);
@@ -219,6 +242,7 @@ CLangListItem CLanguageSelector::CreateGUILangItem(CGUIElement* pGUIParent, cons
     item.strLocale = strLocale;
     item.pContainerPane = pContainerPane;
     item.pLabel = pLabel;
+    item.pLabelShadow = pLabelShadow;
     item.vecLabelInitialPos = pLabel->GetPosition();
     item.vecLabelInitialSize = pLabel->GetSize();
     return item;
@@ -266,9 +290,11 @@ void CLanguageSelector::DoPulse()
             float fMaxAmount = fDeltaSeconds * 16.0f;
             pItem->fFocusEffectPos += Clamp(-fMaxAmount, pItem->fFocusEffectTarget - pItem->fFocusEffectPos, fMaxAmount);
 
-            // Move label
+            // Move label and shadow
             CVector2D vecLabelZoomPos = pItem->vecLabelInitialPos + CVector2D(pItem->vecLabelInitialSize.fX * pItem->fFocusEffectPos * 0.05f, 0);
             pItem->pLabel->SetPosition(vecLabelZoomPos);
+            if (pItem->pLabelShadow)
+                pItem->pLabelShadow->SetPosition(vecLabelZoomPos + CVector2D(1.5f, 1.5f));
         }
     }
 }
@@ -401,6 +427,8 @@ bool CLanguageSelector::OnListItemClick(CGUIElement* pElement)
             m_ButtonItem.strLocale = strNewLocale;
             if (m_ButtonItem.pLabel)
                 m_ButtonItem.pLabel->SetText(g_pLocalization->GetLanguageNativeName(strNewLocale));
+            if (m_ButtonItem.pLabelShadow)
+                m_ButtonItem.pLabelShadow->SetText(g_pLocalization->GetLanguageNativeName(strNewLocale));
         }
     }
     return true;

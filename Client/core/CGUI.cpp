@@ -190,7 +190,7 @@ void CLocalGUI::CreateWindows(bool bGameIsAlreadyLoaded)
 
     // Create the overlayed version labels
     CVector2D ScreenSize = pGUI->GetResolution();
-    SString   strText = "MTA:SA " MTA_DM_BUILDTAG_SHORT;
+    SString   strText = "TMOD " MTA_DM_BUILDTAG_SHORT;
     if (_NETCODE_VERSION_BRANCH_ID != 0x04)
         strText += SString(" (%X)", _NETCODE_VERSION_BRANCH_ID);
     m_pLabelVersionTag = reinterpret_cast<CGUILabel*>(pGUI->CreateLabel(strText));

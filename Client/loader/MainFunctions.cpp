@@ -349,78 +349,7 @@ static constexpr std::size_t kCrashArtifactCount = 3;
 //////////////////////////////////////////////////////////
 void CheckLibVersions()
 {
-#if MTASA_VERSION_TYPE >= VERSION_TYPE_UNTESTED
-    const char* moduleList[] = {"MTA\\loader.dll",
-                                "MTA\\cgui.dll",
-                                "MTA\\core.dll",
-                                "MTA\\game_sa.dll",
-                                "MTA\\multiplayer_sa.dll",
-                                "MTA\\netc.dll",
-                                "MTA\\xmll.dll",
-                                "MTA\\game_sa.dll",
-                                "MTA\\" LOADER_PROXY_DLL_NAME,
-                                "mods\\deathmatch\\client.dll",
-                                "mods\\deathmatch\\pcre2.dll"};
-
-    SString strReqFileVersion;
-    for (uint i = 0; i < NUMELMS(moduleList); i++)
-    {
-        SString strFilename = moduleList[i];
-        // Skip _d suffix for LOADER_PROXY_DLL_NAME and netc.dll as they don't use _d
-        if (strFilename.find(LOADER_PROXY_DLL_NAME) == std::string::npos && strFilename.find("netc.dll") == std::string::npos)
-        {
-    #ifdef MTA_DEBUG
-            strFilename = ExtractBeforeExtension(strFilename) + "_d." + ExtractExtension(strFilename);
-    #endif
-        }
-        SString fullPath = CalcMTASAPath(strFilename);
-        if (!ValidatePath(fullPath))
-        {
-            DisplayErrorMessageBox(SStringX(_("Invalid module path detected.\n") + SString("\n[%s]\n", *strFilename)), _E("CL49"), "invalid-module-path");
-            ExitProcess(EXIT_ERROR);
-        }
-
-        SLibVersionInfo fileInfo;
-        if (FileExists(fullPath))
-        {
-            SString strFileVersion = "0.0.0.0";
-            if (GetLibVersionInfo(fullPath, &fileInfo))
-            {
-                // Validate version numbers
-                if (fileInfo.dwFileVersionMS > 0 && fileInfo.dwFileVersionMS < MAXDWORD && fileInfo.dwFileVersionLS > 0 && fileInfo.dwFileVersionLS < MAXDWORD)
-                {
-                    strFileVersion = SString("%d.%d.%d.%d", fileInfo.dwFileVersionMS >> 16, fileInfo.dwFileVersionMS & 0xFFFF, fileInfo.dwFileVersionLS >> 16,
-                                             fileInfo.dwFileVersionLS & 0xFFFF);
-                }
-            }
-
-            if (strReqFileVersion.empty())
-            {
-                strReqFileVersion = strFileVersion;
-            }
-            else if (strReqFileVersion != strFileVersion)
-            {
-                DisplayErrorMessageBox(SStringX(_("File version mismatch error. Reinstall MTA:SA if you experience problems.\n") +
-                                                SString("\n[%s %s/%s]\n", *strFilename, *strFileVersion, *strReqFileVersion)),
-                                       _E("CL40"), "bad-file-version");
-                break;
-            }
-        }
-        else
-        {
-            DisplayErrorMessageBox(SStringX(_("Some files are missing. Reinstall MTA:SA if you experience problems.\n") + SString("\n[%s]\n", *strFilename)),
-                                   _E("CL41"), "missing-file");
-            break;
-        }
-    }
-#endif
-
-    // Check for Windows 'Safe Mode'
-    if (GetSystemMetrics(SM_CLEANBOOT) != 0)
-    {
-        DisplayErrorMessageBox(SStringX(_("MTA:SA is not compatible with Windows 'Safe Mode'.\n\nPlease restart your PC.\n")), _E("CL42"), "safe-mode");
-        ExitProcess(EXIT_ERROR);
-    }
+    // [TMOD] Bypassed library version checks
 }
 
 // Enum declarations for WSC health
@@ -860,12 +789,7 @@ void ConfigureWerDumpPath()
         FreeLibrary(hWer);
     }
 
-    // WerRegisterAppLocalDump only affects current process and doesn't work for desktop apps anyway.
-    // Always use registry fallback for gta_sa.exe (child process), and for Multi Theft Auto.exe
-    // if WerRegisterAppLocalDump failed.
-    // Note: WER LocalDumps only reads from HKLM, not HKCU (per Microsoft documentation).
-    // Without admin privileges, we cannot update HKLM and stale entries from previous installs may persist.
-    const wchar_t* exeNames[] = {L"gta_sa.exe", loaderConfigured ? nullptr : L"Multi Theft Auto.exe"};
+        const wchar_t* exeNames[] = {L"gta_sa.exe", loaderConfigured ? nullptr : L"TMOD.exe"};
 
     for (const wchar_t* exeName : exeNames)
     {
@@ -2487,3 +2411,5 @@ void HandleOnQuitCommand()
                                 strDirectory.empty() ? NULL : strDirectory.c_str(), nShowCmd);
     }
 }
+
+

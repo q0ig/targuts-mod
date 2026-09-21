@@ -336,6 +336,7 @@ private:
     CGUIFont_Impl* m_pSAHeaderFont;
     CGUIFont_Impl* m_pSAGothicFont;
     CGUIFont_Impl* m_pSansFont;
+    CGUIFont_Impl* m_pSansMenuFont;
     CGUIFont_Impl* m_pUniFont;
 
     std::unordered_set<std::uint32_t>               m_RedrawQueue;

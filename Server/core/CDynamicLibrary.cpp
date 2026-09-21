@@ -176,7 +176,8 @@ bool CDynamicLibrary::CheckMtaVersion(const char* szLibName)
         }
         else
             Print("\n** REINSTALL MTA **\n\n");
-        return false;
+        // [TMOD] Do not abort for custom modded builds
+        // return false;
     }
 
     #endif

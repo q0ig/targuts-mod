@@ -13,9 +13,9 @@
 #include "discord_rpc.h"
 #include "CDiscordRichPresence.h"
 
-constexpr char DEFAULT_APP_ID[] = "468493322583801867";
-constexpr char DEFAULT_APP_ASSET[] = "mta_logo_round";
-constexpr char DEFAULT_APP_ASSET_TEXT[] = "Multi Theft Auto";
+constexpr char DEFAULT_APP_ID[] = "1551192767588335636";
+constexpr char DEFAULT_APP_ASSET[] = "logo"; // Will fallback to Discord app's uploaded asset if they named it logo, or they can upload one.
+constexpr char DEFAULT_APP_ASSET_TEXT[] = "Targut's Mod";
 constexpr char DEFAULT_APP_ASSET_SMALL[] = "";
 constexpr char DEFAULT_APP_ASSET_SMALL_TEXT[] = "";
 
@@ -219,7 +219,7 @@ bool CDiscordRichPresence::SetPresenceDetails(const char* szDetails, bool bCusto
     if (bCustom)
         m_strDiscordAppCustomDetails = szDetails;
     else
-        m_strDiscordAppDetails = szDetails;
+        m_strDiscordAppDetails = "in the targut's sandbox";
 
     m_bUpdateRichPresence = true;
     return true;

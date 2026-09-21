@@ -410,3 +410,25 @@ utils/DXFiles/
 !*.exe
 utils/vswhere.exe
 *.generated.h
+
+# TMOD build & dependency exclusions
+assimp-5.4.1/
+assimp.zip
+assimp_src.zip
+build_assimp.py
+test_path.cpp
+test_assimp.obj
+vendor/assimp_nuget/
+vendor/assimp_src/
+vendor/bullet3/examples/
+vendor/bullet3/data/
+vendor/bullet3/docs/
+vendor/bullet3/test/
+vendor/bullet3/build3/
+vendor/cef3/temp.tar.bz2
+vendor/cef3/cef/Release/libcef.dll
+
+# TMOD required binary libraries
+!vendor/assimp/lib/assimp.lib
+!vendor/assimp/bin/assimp-vc145-mt.dll
+!vendor/bullet3/bin/Release/BulletPhysics.lib

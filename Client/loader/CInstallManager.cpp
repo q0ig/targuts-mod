@@ -1521,6 +1521,7 @@ bool CInstallManager::UpdateOptimusSymbolExport()
 //////////////////////////////////////////////////////////
 SString CInstallManager::_ProcessLayoutChecks()
 {
+    return "ok";
     //
     // Validation
     //
@@ -1549,8 +1550,7 @@ SString CInstallManager::_ProcessLayoutChecks()
 #if MTASA_VERSION_TYPE != VERSION_TYPE_CUSTOM
     // Check reg key exists
     {
-        if (GetRegistryValue("", "Last Install Location").empty())
-            ShowLayoutError("[Registry key not present]");  // Can't find reg key
+        if (GetRegistryValue("", "Last Install Location").empty()) {} // ShowLayoutError("[Registry key not present]");  // Can't find reg key
     }
 #endif
 
@@ -1995,3 +1995,7 @@ SString CInstallManager::_Quit()
     ExitProcess(0);
     return "ok";
 }
+
+
+
+
