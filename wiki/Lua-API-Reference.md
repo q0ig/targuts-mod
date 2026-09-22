@@ -207,6 +207,53 @@ bool success = tmodSetCameraDistance(float distance)
 
 ---
 
+### `tmodSetWeaponViewmodel`
+Binds a custom FBX viewmodel and texture to a specific GTA weapon type ID (e.g. 22 for Colt45, 24 for Deagle, 31 for M4). When the player equips that weapon, TMOD automatically switches to that viewmodel.
+
+```lua
+bool success = tmodSetWeaponViewmodel(int weaponType, string fbxPath, string texturePath)
+```
+
+---
+
+### `tmodSetViewmodelOffset`
+Configures the first-person viewmodel position and pitch tilt in camera space.
+
+```lua
+bool success = tmodSetViewmodelOffset(float right, float forward, float down, float pitchDeg)
+```
+- **Default values:** `right = 0.0`, `forward = 0.38`, `down = -0.22`, `pitchDeg = -12.0`.
+
+---
+
+### `tmodSetViewmodelScale`
+Scales the viewmodel along forward length, vertical height, and lateral width. Used to elongate short arms to prevent cutoff clipping.
+
+```lua
+bool success = tmodSetViewmodelScale(float scaleForward, float scaleUp, float scaleRight)
+```
+- **Default values:** `scaleForward = 1.45`, `scaleUp = 1.15`, `scaleRight = 1.15`.
+
+---
+
+### `tmodSetViewmodelAnimInterval`
+Configures how often the viewmodel animation triggers while in First Person mode (default: 3.0 seconds).
+
+```lua
+bool success = tmodSetViewmodelAnimInterval(float intervalSeconds)
+```
+
+---
+
+### `tmodSetViewmodelAnimName`
+Sets the name of the skeletal animation clip to play from the FBX file (default: `"CINEMA_4D_Main"`).
+
+```lua
+bool success = tmodSetViewmodelAnimName(string animName)
+```
+
+---
+
 ## 4. Asset & Map API (`CLuaTModAssetDefs`)
 
 The Asset API handles dynamic importing of 3D models and automatic collision generation.
