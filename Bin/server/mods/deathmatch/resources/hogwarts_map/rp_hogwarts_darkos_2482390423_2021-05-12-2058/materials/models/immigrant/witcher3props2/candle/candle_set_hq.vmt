@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/immigrant/witcher3props2/candle/candle_set_hq"
+	"$bumpmap" "models/immigrant/witcher3props2/candle/candle_set_hq_n"
+	"$phong"				"1"
+	"$phongboost"			"0.05"
+	"$phongexponent"		"50"
+	"$phongtint"			"[.85 .85 1]"
+	"$phongfresnelranges"	"[.5 .85 30]"
+}

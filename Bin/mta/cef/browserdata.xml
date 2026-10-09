@@ -1,0 +1,20 @@
+<browserdata>
+    <lastupdate>1789761539</lastupdate>
+    <whitelistrev>6</whitelistrev>
+    <blacklistrev>2</blacklistrev>
+    <globalwhitelist>
+        <url>forum.mtasa.com</url>
+        <url>community.mtasa.com</url>
+        <url>wiki.mtasa.com</url>
+        <url>ssl.gstatic.com</url>
+        <url>forum.multitheftauto.com</url>
+        <url>community.multitheftauto.com</url>
+        <url>wiki.multitheftauto.com</url>
+        <url></url>
+    </globalwhitelist>
+    <globalblacklist>
+        <url></url>
+    </globalblacklist>
+    <customblacklist/>
+    <customwhitelist/>
+</browserdata>

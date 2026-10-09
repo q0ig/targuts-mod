@@ -1,0 +1,360 @@
+<mainconfig>
+    <settings>
+        <display_fullscreen_style>1</display_fullscreen_style>
+        <nick>targut</nick>
+        <host>localhost</host>
+        <port>22003</port>
+        <password/>
+        <debugfile/>
+        <console_pos>0 0</console_pos>
+        <console_size>200 200</console_size>
+        <serverbrowser_size>720 495</serverbrowser_size>
+        <fps_limit>100</fps_limit>
+        <vsync>0</vsync>
+        <chat_font>2</chat_font>
+        <chat_lines>10</chat_lines>
+        <chat_color>0 0 0 0</chat_color>
+        <chat_text_color>172 213 254 255</chat_text_color>
+        <chat_text_outline>0</chat_text_outline>
+        <chat_input_color>0 0 0 0</chat_input_color>
+        <chat_input_prefix_color>172 213 254 255</chat_input_prefix_color>
+        <chat_input_text_color>172 213 254 255</chat_input_text_color>
+        <chat_scale>1 1</chat_scale>
+        <chat_width>1.500000</chat_width>
+        <chat_css_style_text>0</chat_css_style_text>
+        <chat_css_style_background>0</chat_css_style_background>
+        <chat_line_life>12000</chat_line_life>
+        <chat_line_fade_out>3000</chat_line_fade_out>
+        <chat_use_cegui>0</chat_use_cegui>
+        <chat_nickcompletion>1</chat_nickcompletion>
+        <chat_position_offset_x>0.012500</chat_position_offset_x>
+        <chat_position_offset_y>0.015000</chat_position_offset_y>
+        <chat_position_horizontal>0</chat_position_horizontal>
+        <chat_position_vertical>0</chat_position_vertical>
+        <chat_text_alignment>0</chat_text_alignment>
+        <server_can_flash_window>1</server_can_flash_window>
+        <allow_tray_notifications>1</allow_tray_notifications>
+        <text_scale>1.000000</text_scale>
+        <invert_mouse>0</invert_mouse>
+        <fly_with_mouse>0</fly_with_mouse>
+        <steer_with_mouse>0</steer_with_mouse>
+        <classic_controls>0</classic_controls>
+        <controller_device>auto</controller_device>
+        <controller_vibration>1</controller_vibration>
+        <mastervolume>0.210000</mastervolume>
+        <mtavolume>1.000000</mtavolume>
+        <voicevolume>1.000000</voicevolume>
+        <mapalpha>155</mapalpha>
+        <mapimage>0</mapimage>
+        <browser_speed>1</browser_speed>
+        <single_download>0</single_download>
+        <packet_tag>0</packet_tag>
+        <progress_animation>1</progress_animation>
+        <update_build_type>0</update_build_type>
+        <update_auto_install>1</update_auto_install>
+        <volumetric_shadows>0</volumetric_shadows>
+        <aspect_ratio>0</aspect_ratio>
+        <hud_match_aspect_ratio>1</hud_match_aspect_ratio>
+        <anisotropic>0</anisotropic>
+        <grass>1</grass>
+        <heat_haze>0</heat_haze>
+        <tyre_smoke_enabled>0</tyre_smoke_enabled>
+        <high_detail_vehicles>0</high_detail_vehicles>
+        <high_detail_peds>0</high_detail_peds>
+        <blur>0</blur>
+        <corona_reflections>0</corona_reflections>
+        <dynamic_ped_shadows>0</dynamic_ped_shadows>
+        <fast_clothes_loading>1</fast_clothes_loading>
+        <allow_screen_upload>1</allow_screen_upload>
+        <allow_external_sounds>1</allow_external_sounds>
+        <max_clientscript_log_kb>5000</max_clientscript_log_kb>
+        <display_windowed>0</display_windowed>
+        <multimon_fullscreen_minimize>1</multimon_fullscreen_minimize>
+        <borderless_gamma_power>0.950000</borderless_gamma_power>
+        <borderless_brightness_scale>1.030000</borderless_brightness_scale>
+        <borderless_contrast_scale>1.000000</borderless_contrast_scale>
+        <borderless_saturation_scale>1.000000</borderless_saturation_scale>
+        <borderless_enable_srgb>0</borderless_enable_srgb>
+        <borderless_gamma_enabled>0</borderless_gamma_enabled>
+        <borderless_brightness_enabled>0</borderless_brightness_enabled>
+        <borderless_contrast_enabled>0</borderless_contrast_enabled>
+        <borderless_saturation_enabled>0</borderless_saturation_enabled>
+        <borderless_apply_windowed>0</borderless_apply_windowed>
+        <borderless_apply_fullscreen>0</borderless_apply_fullscreen>
+        <vertical_aim_sensitivity>0.000336</vertical_aim_sensitivity>
+        <process_priority>0</process_priority>
+        <process_dpi_aware>0</process_dpi_aware>
+        <mute_master_when_minimized>0</mute_master_when_minimized>
+        <mute_sfx_when_minimized>0</mute_sfx_when_minimized>
+        <mute_radio_when_minimized>0</mute_radio_when_minimized>
+        <mute_mta_when_minimized>0</mute_mta_when_minimized>
+        <mute_voice_when_minimized>0</mute_voice_when_minimized>
+        <share_file_cache>1</share_file_cache>
+        <show_unsafe_resolutions>0</show_unsafe_resolutions>
+        <fov>70</fov>
+        <browser_remote_websites>1</browser_remote_websites>
+        <browser_remote_javascript>1</browser_remote_javascript>
+        <filter_duplicate_log_lines>1</filter_duplicate_log_lines>
+        <always_show_transferbox>0</always_show_transferbox>
+        <allow_discord_rpc>1</allow_discord_rpc>
+        <discord_rpc_share_data>1</discord_rpc_share_data>
+        <discord_rpc_share_data_firsttime>1</discord_rpc_share_data_firsttime>
+        <browser_enable_gpu>1</browser_enable_gpu>
+        <browser_enable_video_acceleration>1</browser_enable_video_acceleration>
+        <process_cpu_affinity>1</process_cpu_affinity>
+        <ask_before_disconnect>1</ask_before_disconnect>
+        <allow_steam_client>0</allow_steam_client>
+        <use_mouse_sensitivity_for_aiming>0</use_mouse_sensitivity_for_aiming>
+        <locale>en_US</locale>
+        <display_resolution>1280x1024x32</display_resolution>
+        <streaming_memory>256</streaming_memory>
+        <current_skin>Default 2023</current_skin>
+        <radiovolume>0.000000</radiovolume>
+        <sfxvolume>0.270000</sfxvolume>
+        <reportsettings>filter2@+all,-{1000~2007},-2050,-2051,-{3211},-{4002},-4023,-5132,-5133,-7011,-7043,-7411,-7420,-7601,-7744,-7745,-7801,-{7832~7833},-{7842~7845},-7940,-8070,-8613,-7711,-9423;max@88001;min@11</reportsettings>
+        <auto_refresh_browser>0</auto_refresh_browser>
+        <force_browse_other_versions/>
+        <browser_layout_interval_ms/>
+        <save_server_passwords>0</save_server_passwords>
+        <photosaving>0</photosaving>
+    </settings>
+    <binds>
+        <bind key="num_0" control="fire"/>
+        <bind key="lctrl" control="fire"/>
+        <bind key="mouse1" control="fire"/>
+        <bind key="e" control="next_weapon"/>
+        <bind key="num_enter" control="next_weapon"/>
+        <bind key="mouse_wheel_down" control="next_weapon"/>
+        <bind key="q" control="previous_weapon"/>
+        <bind key="num_dec" control="previous_weapon"/>
+        <bind key="mouse_wheel_up" control="previous_weapon"/>
+        <bind key="arrow_u" control="forwards"/>
+        <bind key="w" control="forwards"/>
+        <bind key="arrow_d" control="backwards"/>
+        <bind key="s" control="backwards"/>
+        <bind key="arrow_l" control="left"/>
+        <bind key="a" control="left"/>
+        <bind key="arrow_r" control="right"/>
+        <bind key="d" control="right"/>
+        <bind key="pgup" control="zoom_in"/>
+        <bind key="x" control="zoom_in"/>
+        <bind key="mouse_wheel_up" control="zoom_in"/>
+        <bind key="pgdn" control="zoom_out"/>
+        <bind key="z" control="zoom_out"/>
+        <bind key="mouse_wheel_down" control="zoom_out"/>
+        <bind key="enter" control="enter_exit"/>
+        <bind key="f" control="enter_exit"/>
+        <bind key="v" control="change_camera"/>
+        <bind key="home" control="change_camera"/>
+        <bind key="lshift" control="jump"/>
+        <bind key="rctrl" control="jump"/>
+        <bind key="space" control="sprint"/>
+        <bind key="num_1" control="look_behind"/>
+        <bind key="mouse3" control="look_behind"/>
+        <bind key="c" control="crouch"/>
+        <bind key="tab" control="action"/>
+        <bind key="lalt" control="walk"/>
+        <bind key="rctrl" control="vehicle_fire"/>
+        <bind key="lalt" control="vehicle_fire"/>
+        <bind key="mouse1" control="vehicle_fire"/>
+        <bind key="lctrl" control="vehicle_secondary_fire"/>
+        <bind key="num_0" control="vehicle_secondary_fire"/>
+        <bind key="a" control="vehicle_left"/>
+        <bind key="arrow_l" control="vehicle_left"/>
+        <bind key="d" control="vehicle_right"/>
+        <bind key="arrow_r" control="vehicle_right"/>
+        <bind key="arrow_u" control="steer_forward"/>
+        <bind key="arrow_d" control="steer_back"/>
+        <bind key="w" control="accelerate"/>
+        <bind key="s" control="brake_reverse"/>
+        <bind key="insert" control="radio_next"/>
+        <bind key="4" control="radio_next"/>
+        <bind key="mouse_wheel_up" control="radio_next"/>
+        <bind key="delete" control="radio_previous"/>
+        <bind key="r" control="radio_previous"/>
+        <bind key="mouse_wheel_down" control="radio_previous"/>
+        <bind key="F5" control="radio_user_track_skip"/>
+        <bind key="capslock" control="horn"/>
+        <bind key="h" control="horn"/>
+        <bind key="2" control="sub_mission"/>
+        <bind key="num_add" control="sub_mission"/>
+        <bind key="space" control="handbrake"/>
+        <bind key="rctrl" control="handbrake"/>
+        <bind key="q" control="vehicle_look_left"/>
+        <bind key="e" control="vehicle_look_right"/>
+        <bind key="mouse3" control="vehicle_look_behind"/>
+        <bind key="mouse2" control="vehicle_mouse_look"/>
+        <bind key="num_4" control="special_control_left"/>
+        <bind key="num_6" control="special_control_right"/>
+        <bind key="num_2" control="special_control_down"/>
+        <bind key="end" control="special_control_down"/>
+        <bind key="num_8" control="special_control_up"/>
+        <bind key="delete" control="special_control_up"/>
+        <bind key="delete" control="aim_weapon"/>
+        <bind key="capslock" control="aim_weapon"/>
+        <bind key="mouse2" control="aim_weapon"/>
+        <bind key="y" control="conversation_yes"/>
+        <bind key="n" control="conversation_no"/>
+        <bind key="g" control="group_control_forwards"/>
+        <bind key="h" control="group_control_back"/>
+        <bind key="g" state="down" command="enter_passenger"/>
+        <bind key="F12" state="down" command="screenshot"/>
+        <bind key="t" state="down" command="chatbox" arguments="chatboxsay"/>
+        <bind key="y" state="down" command="chatbox" arguments="teamsay 255 0 0"/>
+        <bind key="F11" state="down" command="radar" arguments="-1"/>
+        <bind key="num_add" state="down" command="radar_zoom_in"/>
+        <bind key="num_sub" state="down" command="radar_zoom_out"/>
+        <bind key="num_8" state="down" command="radar_move_north"/>
+        <bind key="num_2" state="down" command="radar_move_south"/>
+        <bind key="num_6" state="down" command="radar_move_east"/>
+        <bind key="num_4" state="down" command="radar_move_west"/>
+        <bind key="num_0" state="down" command="radar_attach"/>
+        <bind key="num_div" state="down" command="radar_opacity_down"/>
+        <bind key="num_mul" state="down" command="radar_opacity_up"/>
+        <bind key="num_1" state="down" command="radar_help"/>
+        <bind key="z" state="down" command="voiceptt" arguments="1"/>
+        <bind key="z" state="up" command="voiceptt" arguments="0"/>
+        <bind key="pgup" state="down" command="chatscrollup" arguments="1"/>
+        <bind key="pgup" state="up" command="chatscrollup" arguments="0"/>
+        <bind key="pgdn" state="down" command="chatscrolldown" arguments="-1"/>
+        <bind key="pgdn" state="up" command="chatscrolldown" arguments="0"/>
+        <bind key="pgup" state="down" command="debugscrollup" arguments="1"/>
+        <bind key="pgup" state="up" command="debugscrollup" arguments="0"/>
+        <bind key="pgdn" state="down" command="debugscrolldown" arguments="-1"/>
+        <bind key="pgdn" state="up" command="debugscrolldown" arguments="0"/>
+        <bind key="h" state="down" command="fly"/>
+    </binds>
+    <updater>
+        <var>
+            <version_lastchecktime>2026-09-25 20:41:14</version_lastchecktime>
+            <master_lastchecktime>2026-09-25 20:41:14</master_lastchecktime>
+            <master_highestnotifyrevision></master_highestnotifyrevision>
+            <news_lastchecktime>2026-09-25 20:41:14</news_lastchecktime>
+            <news_lastnewsdate>2023-06-16</news_lastnewsdate>
+            <crashdump_historylist>
+                <dump date="20260921_1754" tag="1.7-custom.0.000_client_0012d6e9"></dump>
+            </crashdump_historylist>
+        </var>
+        <mastercache>
+            <master>
+                <revision>2025-07-31</revision>
+                <serverlist>
+                    <server priority="3">http://updatesa.mtasa.com/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="4">http://updatesa.multitheftauto.com/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="3">http://5.135.237.224/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="5">http://57.129.83.162/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="6">http://updatesa.mtasa.ohbah.com/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="7">http://updatesa.mtasa.mooo.com/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="8">http://updatesa.kows.mooo.com/sa/master/?v=%VERSION%&amp;id=%ID%</server>
+                </serverlist>
+                <interval>1d</interval>
+            </master>
+            <version>
+                <serverlist>
+                    <server priority="3">http://updatesa.mtasa.com/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                    <server priority="4">http://updatesa.multitheftauto.com/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                    <server priority="3">http://5.135.237.224/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                    <server priority="5">http://57.129.83.162/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                    <server priority="6">http://updatesa.mtasa.ohbah.com/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                    <server priority="7">http://updatesa.mtasa.mooo.com/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                    <server priority="8">http://updatesa.kows.mooo.com/sa/version/?v=%VERSION%&amp;id=%ID%&amp;ty=%TYPE%&amp;da=%DATA%&amp;be=%BETA%&amp;re=%REFER%&amp;s3=_STATUS_&amp;sys=_SYS_&amp;use=_USAGE_&amp;scut=_SCUT_&amp;opt=_OPTIMUS_&amp;vid=_VID_&amp;sy2=_SYS2_&amp;sy3=_SYS3_&amp;gtamd5=_GTAMD5_</server>
+                </serverlist>
+                <interval>3h</interval>
+            </version>
+            <report>
+                <serverlist>
+                    <server priority="3">http://updatesa.mtasa.com/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="4">http://updatesa.multitheftauto.com/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="2">http://5.135.237.224/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="5">http://57.129.83.162/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="6">http://updatesa.mtasa.ohbah.com/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="7">http://updatesa.mtasa.mooo.com/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="8">http://updatesa.kows.mooo.com/sa/report/?v=%VERSION%&amp;id=%ID%</server>
+                </serverlist>
+                <interval>1h</interval>
+                <filter2>+all,-{1000~2007},-2050,-2051,-{3211},-{4002},-4023,-5132,-5133,-7011,-7043,-7411,-7420,-7601,-7744,-7745,-7801,-{7832~7833},-{7842~7845},-7940,-8070,-8613,-7711,-9423</filter2>
+                <minsize>11</minsize>
+                <maxsize>88001</maxsize>
+            </report>
+            <crashdump>
+                <serverlist>
+                    <server priority="3">http://updatesa.mtasa.com/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                    <server priority="4">http://updatesa.multitheftauto.com/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                    <server priority="2">http://5.135.237.224/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                    <server priority="5">http://57.129.83.162/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                    <server priority="6">http://updatesa.mtasa.ohbah.com/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                    <server priority="7">http://updatesa.mtasa.mooo.com/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                    <server priority="8">http://updatesa.kows.mooo.com/sa/crashdump/?v=%VERSION%&amp;id=%ID%&amp;file=%FILE%</server>
+                </serverlist>
+                <duplicates>0</duplicates>
+                <maxhistorylength>100</maxhistorylength>
+            </crashdump>
+            <trouble>
+                <serverlist>
+                    <server priority="4">https://help.multitheftauto.com/sa/trouble/?v=%VERSION%&amp;id=%ID%&amp;tr=%TROUBLE%</server>
+                </serverlist>
+            </trouble>
+            <ase>
+                <serverlist>
+                    <server priority="4">http://mirror.multitheftauto.com/ase/mta/ase2file2.dat?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="4">http://91.121.44.90/ase/mta/ase2file2.dat?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="4">https://s6.multitheftauto.com/ase/mta/ase2file2.dat?v=%VERSION%&amp;id=%ID%</server>
+                    <server priority="5">http://57.129.83.162/ase/mta/ase2file2.dat?v=%VERSION%&amp;id=%ID%</server>
+                </serverlist>
+            </ase>
+            <sidegrade>
+                <serverlist>
+                    <server priority="4">https://updatesa.multitheftauto.com/sa/sidegrade/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;re=%REFER%&amp;wv=%WANTVER%</server>
+                    <server priority="5">http://5.135.237.224/sa/sidegrade/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;re=%REFER%&amp;wv=%WANTVER%</server>
+                    <server priority="6">http://57.129.83.162/sa/sidegrade/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;re=%REFER%&amp;wv=%WANTVER%</server>
+                    <server priority="7">http://updatesa.mtasa.ohbah.com/sa/sidegrade/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;re=%REFER%&amp;wv=%WANTVER%</server>
+                    <server priority="8">http://updatesa.mtasa.mooo.com/sa/sidegrade/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;re=%REFER%&amp;wv=%WANTVER%</server>
+                    <server priority="9">http://updatesa.kows.mooo.com/sa/sidegrade/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;re=%REFER%&amp;wv=%WANTVER%</server>
+                </serverlist>
+                <nobrowselist>
+                    <nobrowse version="1.0">1.1n;1.1N;1.2n;1.2sx;1.3n;1.3v;</nobrowse>
+                    <nobrowse version="1.1">1.1n;1.1N;1.2n;1.2sx;1.3n;1.3v;</nobrowse>
+                </nobrowselist>
+                <onlybrowselist>
+                    <onlybrowse version="1.1">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                    <onlybrowse version="1.2">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                    <onlybrowse version="1.3">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                    <onlybrowse version="1.4">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                    <onlybrowse version="1.5">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                    <onlybrowse version="1.6">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                    <onlybrowse version="1.7">1.7;1.6;1.5;1.4;1.3;1.2;1.1;1.0</onlybrowse>
+                </onlybrowselist>
+            </sidegrade>
+            <news>
+                <serverlist>
+                    <server priority="4">https://updatesa.multitheftauto.com/sa/news/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;ln=%LASTNEWS%</server>
+                    <server priority="5">http://5.135.237.224/sa/news/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;ln=%LASTNEWS%</server>
+                    <server priority="6">http://57.129.83.162/sa/news/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;ln=%LASTNEWS%</server>
+                    <server priority="7">http://updatesa.mtasa.ohbah.com/sa/news/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;ln=%LASTNEWS%</server>
+                    <server priority="8">http://updatesa.mtasa.mooo.com/sa/news/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;ln=%LASTNEWS%</server>
+                    <server priority="9">http://updatesa.kows.mooo.com/sa/news/?v=%VERSION%&amp;id=%ID%&amp;be=%BETA%&amp;ln=%LASTNEWS%</server>
+                </serverlist>
+                <interval>18h</interval>
+                <oldestpost>2020-10-11</oldestpost>
+                <maxhistorylength>3</maxhistorylength>
+            </news>
+            <misc>
+                <debug>
+                    <filter2>-all,+{500~2000},+5412,+5413,+6311,+6450,+6451,+7123,+7124,+8542,-7711,-9423,-9423</filter2>
+                </debug>
+            </misc>
+        </mastercache>
+    </updater>
+    <serverbrowser_options>
+        <list id="0" include_empty="1" include_full="1" include_locked="1" active="1"/>
+        <list id="1" include_empty="1" include_full="1" include_locked="1"/>
+        <list id="2" include_empty="1" include_full="1" include_locked="1" include_offline="1"/>
+        <list id="3" include_empty="1" include_full="1" include_locked="1" include_offline="1"/>
+    </serverbrowser_options>
+    <recently_played_servers>
+        <recently_played_server host="127.0.0.1" port="22003"/>
+    </recently_played_servers>
+    <connect_history>
+        <connected_server host="127.0.0.1" port="22003"/>
+    </connect_history>
+</mainconfig>

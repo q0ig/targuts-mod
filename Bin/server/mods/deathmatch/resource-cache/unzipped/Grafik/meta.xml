@@ -1,0 +1,74 @@
+<meta>
+    <info author="loki" version="17-02-03" name="ENB SC Tus 5" type="script"/>
+	<min_mta_version client="1.5.2-9.07903" server="1.5.2" />
+    <oop>true</oop>
+    
+    <script src="cl_shader.lua" type="client" cache="false" />
+	<script src="cl.lua" type="client" cache="false" />
+    <script src="sv.lua" type="server"/>
+
+ 	<file src="files/bg.png"/>
+	<file src="files/key.png"/>
+	<file src="files/key2.png"/>
+	<file src="files/scroll.png"/>
+	<file src="files/select.png"/>
+
+
+
+	<file src="files/hdroad/shader.fx" />    
+    <file src="files/hdroad/cos_hiwaymid_256.png" /> 
+    <file src="files/hdroad/crossing_law.png" /> 
+    <file src="files/hdroad/crossing2_law.png" />    
+    <file src="files/hdroad/des_oldrunway.png" />
+    <file src="files/hdroad/desert_1line256.png" />
+    <file src="files/hdroad/dt_road_stoplinea.png" />
+    <file src="files/hdroad/hiwayend_256.png" />
+    <file src="files/hdroad/roadnew4_256.png" />
+    <file src="files/hdroad/sf_junction1.png" />
+    <file src="files/hdroad/sf_junction2.png" />
+    <file src="files/hdroad/sl_freew2road1.png" />
+    <file src="files/hdroad/snpedtest1BLND.png" />
+    <file src="files/hdroad/Tar_1line256HV.png" />
+    <file src="files/hdroad/Tar_1line256HVblend2.png" />
+    <file src="files/hdroad/Tar_freewyleft.png" />
+    <file src="files/hdroad/Tar_freewyright.png" />
+    <file src="files/hdroad/vegasdirtyroad3_256.png" />
+    <file src="files/hdroad/vegastriproad1_256.png" />
+
+
+    <file src="files/hdwater/cube_env256.dds" />
+    <file src="files/hdwater/smallnoise3d.dds" />
+    <file src="files/hdwater/water.fx" />
+
+
+
+
+
+
+
+
+
+    <script src="files/hdaero/c_shader_skybox_alt.lua" type="client" />
+    <file src="files/hdaero/shaders/shader_skydome.fx" type="client" />
+    <file src="files/hdaero/shaders/shader_null.fx" type="client" />
+    <file src="files/hdaero/textures/skydome.jpg" type="client" />
+    <file src="files/hdaero/models/skybox_model.dff" type="client" />
+    <file src="files/hdaero/models/skybox_model.txd" type="client" />
+
+    
+
+
+
+
+
+
+
+ 	<script src="files/reflection/c_car_paint.lua" type="client" />
+    <file src="files/reflection/car_paint.fx" type="client" />
+    <file src="files/reflection/mta-helper.fx" type="client" />
+
+    <file src="files/reflection/cube_env256.dds" type="client" />
+    <file src="files/reflection/smallnoise3d.dds" type="client" />
+
+</meta>
+<!-- www.sparrow-mta.blogspot.com -->

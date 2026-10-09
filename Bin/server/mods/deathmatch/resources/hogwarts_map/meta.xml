@@ -1,0 +1,8 @@
+<meta>
+    <info author="TMOD Team" type="map" name="Hogwarts Castle (GMod Port)" version="1.0.0" />
+    <min_mta_version client="1.5.8" server="1.5.8" />
+    
+    <script src="client.lua" type="client" />
+    <file src="targut-hogwartsss.obj" />
+    <file src="targut-hogwartsss.mtl" />
+</meta>

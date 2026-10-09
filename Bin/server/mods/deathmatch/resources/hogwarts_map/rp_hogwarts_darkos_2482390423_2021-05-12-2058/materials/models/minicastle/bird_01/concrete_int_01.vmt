@@ -1,0 +1,10 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "concrete/concrete_int_01"
+	"$surfaceprop" "concrete"
+
+
+	
+	"%keywords" "l4d2"
+	
+}

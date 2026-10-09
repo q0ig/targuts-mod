@@ -127,7 +127,7 @@ $RECYCLE.BIN/
 x64/
 x86/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
 [Ll]og/
 
@@ -400,7 +400,6 @@ __pycache__/
 # End of https://www.gitignore.io/api/osx,c++,linux,windows,visualstudio,premake-gmake,visualstudiocode
 
 
-Bin/
 Build/
 InstallFiles/
 utils/DXFiles.zip
@@ -410,6 +409,16 @@ utils/DXFiles/
 !*.exe
 utils/vswhere.exe
 *.generated.h
+
+# TMOD Bin runtime inclusions & exclusions
+Bin/**/*.pdb
+Bin/**/*.dmp
+Bin/**/*.exp
+Bin/**/dumps/
+Bin/tests/
+Bin/lib/CEF.lib
+Bin/mta/libcef.dll
+!Bin/mta/libcef.dll.part*
 
 # TMOD build & dependency exclusions
 assimp-5.4.1/

@@ -1,0 +1,9 @@
+vertexlitgeneric
+{
+$basetexture "concrete/sewer_concretewall02b"
+$surfaceprop concrete
+$bumpmap "concrete/conc_map-ssbump"
+$envmap env_cubemap
+$normalmapalphaenvmapmask 1
+$envmaptint "[ .1 .1 .1 ]"
+}

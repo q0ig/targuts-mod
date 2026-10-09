@@ -1,0 +1,7 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "de_cbble/woodbeam01"
+	"$surfaceprop" "wood"
+	//"$bumpmap" "de_cbble/woodbeam01_normal"
+	"%keywords" "cstrike"
+}

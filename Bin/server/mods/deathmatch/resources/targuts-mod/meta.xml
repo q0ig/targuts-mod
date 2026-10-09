@@ -1,0 +1,14 @@
+<meta>
+    <info author="Antigravity" type="script" name="Targuts Custom Physics Mod" version="1.0.0" />
+    <min_mta_version client="1.5.8" server="1.5.8" />
+    
+    <!-- Scripts -->
+    <script src="client.lua" type="client" />
+
+    <!-- Assets -->
+    <file src="top.dff" />
+    <file src="kup.dff" />
+    <file src="water.fx" />
+    <file src="cube_env256.dds" />
+    <file src="smallnoise3d.dds" />
+</meta>

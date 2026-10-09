@@ -1,0 +1,9 @@
+vertexlitgeneric
+{
+$basetexture "concrete/concretewall007a"
+$surfaceprop concrete
+$detail "detail\dt_conc"
+$detailscale 8
+$detailblendfactor .6
+$detailblendmode 0
+}

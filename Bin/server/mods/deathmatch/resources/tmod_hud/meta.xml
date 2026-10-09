@@ -1,0 +1,4 @@
+<meta>
+    <info author="TMod Team" description="Garry's Mod / Source Engine Style HUD & Commands" type="script" version="1.0.0" />
+    <script src="client.lua" type="client" />
+</meta>

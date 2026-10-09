@@ -1,0 +1,13 @@
+<meta>
+    <info author="Antigravity" type="script" name="Garrys Mod Tool Gun - Map Spawner &amp; Editor" version="1.0.0" />
+    <min_mta_version client="1.5.8" server="1.5.8" />
+
+    <!-- Scripts -->
+    <script src="shared.lua" type="shared" />
+    <script src="server.lua" type="server" />
+    <script src="client.lua" type="client" />
+
+    <!-- Weapon Replacement Files (Garry's Mod Tool Gun) -->
+    <file src="toolgun.txd" />
+    <file src="toolgun.dff" />
+</meta>
